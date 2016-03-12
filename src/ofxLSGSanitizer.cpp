@@ -1,10 +1,10 @@
-#include "Sanitizer.h"
+#include "ofxLSGSanitizer.h"
 
-bool Sanitizer::isRuleValid(string rule){
+bool ofxLSGSanitizer::isRuleValid(string rule){
     return hasMinimumParts(rule) && containsSeparator(rule);
 }
 
-bool Sanitizer::hasMinimumParts(string rule){
+bool ofxLSGSanitizer::hasMinimumParts(string rule){
     auto parts = ofSplitString(rule, "->");
     if((parts.size() < 2) && (parts.size() > 3)){
         string msg ="All the rules need to be formatted as follow: 'axiom -> rule' or 'probability -> axiom -> rule'";
@@ -15,7 +15,7 @@ bool Sanitizer::hasMinimumParts(string rule){
     }
 }
 
-bool Sanitizer::containsSeparator(string rule){
+bool ofxLSGSanitizer::containsSeparator(string rule){
     if(rule.find("->") == std::string::npos){
         string msg = "the string " + rule + "does not contain the symbol '->'";
         ofLogError(ofToString(msg));
@@ -25,7 +25,7 @@ bool Sanitizer::containsSeparator(string rule){
     }
 }
 
-bool Sanitizer::isProbabilityValid(vector<RuleStochastic> ruleList){
+bool ofxLSGSanitizer::isProbabilityValid(vector<ofxLSGRuleStochastic> ruleList){
     float tot = 0.0;
     for (auto r : ruleList){
         tot += r.probability;
@@ -39,13 +39,13 @@ bool Sanitizer::isProbabilityValid(vector<RuleStochastic> ruleList){
     }
 }
 
-bool Sanitizer::roundBracketsAreClosed(string str){
-    int opened = Utils::countSubstring(str, "(");
-    int closed = Utils::countSubstring(str, ")");
+bool ofxLSGSanitizer::roundBracketsAreClosed(string str){
+    int opened = ofxLSGUtils::countSubstring(str, "(");
+    int closed = ofxLSGUtils::countSubstring(str, ")");
     return opened == closed;
 }
 
-string Sanitizer::removeSpacesAndNewlines(string str){
+string ofxLSGSanitizer::removeSpacesAndNewlines(string str){
     //whitespace
     size_t first = str.find_first_not_of(' ');
     size_t last = str.find_last_not_of(' ');

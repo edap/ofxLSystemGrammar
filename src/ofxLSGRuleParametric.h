@@ -15,7 +15,7 @@ private:
     string predecessor;
     vector<string> predecessorParameters;
     vector<string> predecessorLetters;
-    vector<Condition> conditions;
+    vector<ofxLSGCondition> conditions;
     vector<string> successorModules;
     vector<pair<string,vector<ofxLSGOperation>>> successor;
 

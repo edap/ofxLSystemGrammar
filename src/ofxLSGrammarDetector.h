@@ -1,8 +1,8 @@
 #pragma once
 #include "ofMain.h"
-#include "Utils.h"
+#include "ofxLSGUtils.h"
 
-class GrammarDetector{
+class ofxLSGrammarDetector{
 public:
     static const bool isStochastic(vector<string> ruleList);
     static const bool isStandard(vector<string> ruleList);

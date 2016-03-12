@@ -1,6 +1,6 @@
-#include "ParametricGrammar.h"
+#include "ofxLSGrammarParametric.h"
 
-string ParametricGrammar::generateSentence(vector<string> ruleList, int _numberOfSteps, string _axiom){
+string ofxLSGrammarParametric::generateSentence(vector<string> ruleList, int _numberOfSteps, string _axiom){
     string finalSentence = _axiom;
     auto rulesContainer = getRules(ruleList);
 
@@ -12,9 +12,8 @@ string ParametricGrammar::generateSentence(vector<string> ruleList, int _numberO
     return finalSentence;
 }
 
-string ParametricGrammar::rewriteSentence(string axiom, vector<RuleParametric> rulesContainer){
+string ofxLSGrammarParametric::rewriteSentence(string axiom, vector<ofxLSGRuleParametric> rulesContainer){
     auto modules = getModules(axiom);
-    //mutable vars
     auto currentIterationMap = initializeMap(modules, rulesContainer);
     string fin = "";
     for(auto module:currentIterationMap ){
@@ -30,7 +29,7 @@ string ParametricGrammar::rewriteSentence(string axiom, vector<RuleParametric> r
                             auto key = op.getKey();
                             opResults.insert(make_pair(key, ofToString(res)));
                         }
-                        auto stringAfterOperation = Utils::mapCopyToString(opResults, successor.first);
+                        auto stringAfterOperation = ofxLSGUtils::mapCopyToString(opResults, successor.first);
                         fin += stringAfterOperation;
                     }
                 }
@@ -40,7 +39,6 @@ string ParametricGrammar::rewriteSentence(string axiom, vector<RuleParametric> r
     }
     return fin;
 }
-
 
 // This method iterates through modules and rules in order to initialize a map
 // where the values are assigned to the params. For example, if we have a module
@@ -53,8 +51,8 @@ string ParametricGrammar::rewriteSentence(string axiom, vector<RuleParametric> r
 // if we have a module that is simply C, and all the predecessors does not mentions
 // how this moudle should or should not reproduce itself, we simply leave it as it is
 // and we forward it to the next generation
-vector<pair <string, map<string, float>>> ParametricGrammar::initializeMap(
-    vector<pair<string,vector<float>>> modules, vector<RuleParametric> rulesContainer)
+vector<pair <string, map<string, float>>> ofxLSGrammarParametric::initializeMap(
+    vector<pair<string,vector<float>>> modules, vector<ofxLSGRuleParametric> rulesContainer)
     {
     vector<pair <string, map<string, float>>> initializedMap;
     auto predContainer = getVarNamesOutOfRules(rulesContainer);
@@ -81,7 +79,7 @@ vector<pair <string, map<string, float>>> ParametricGrammar::initializeMap(
     return initializedMap;
 }
 
-const bool ParametricGrammar::moduleNotMentionedInPredecessors(map<string,vector<string>> predecessors, pair<string,vector<float>> module){
+const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(map<string,vector<string>> predecessors, pair<string,vector<float>> module){
     for(auto pred:predecessors){
         if(ofIsStringInString(pred.first, module.first)){
             return false;
@@ -90,7 +88,7 @@ const bool ParametricGrammar::moduleNotMentionedInPredecessors(map<string,vector
     return true;
 };
 
-const bool ParametricGrammar::moduleNotMentionedInPredecessors(vector<RuleParametric> ruleContainer, pair <string, map<string, float>> module){
+const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(vector<ofxLSGRuleParametric> ruleContainer, pair <string, map<string, float>> module){
     for(auto rule:ruleContainer){
         if(ofIsStringInString(rule.getPredecessor(), module.first)){
             return false;
@@ -101,15 +99,15 @@ const bool ParametricGrammar::moduleNotMentionedInPredecessors(vector<RuleParame
 
 // This method takes vector containing a string for each rule, and for each string
 // build a RuleParametric object(validating it) and put in in a container
-const vector<RuleParametric> ParametricGrammar::getRules(vector<string> ruleList){
-    vector<RuleParametric> rulesContainer;
+const vector<ofxLSGRuleParametric> ofxLSGrammarParametric::getRules(vector<string> ruleList){
+    vector<ofxLSGRuleParametric> rulesContainer;
     for(auto rule:ruleList){
         auto parts = ofSplitString(rule, "->");
         if(parts.size()==2){
             auto predecessor_and_condition = getPredecessorAndCondition(parts.at(0));
             auto predecessor = predecessor_and_condition.at(0);
             auto condition = predecessor_and_condition.at(1);
-            auto successor = Sanitizer::removeSpacesAndNewlines(parts.at(1));
+            auto successor = ofxLSGSanitizer::removeSpacesAndNewlines(parts.at(1));
             rulesContainer.push_back(RuleParametric(predecessor, condition, successor));
         }else{
             ofLogError("Parametric Grammar detected, but rule not in the correct format");
@@ -126,7 +124,7 @@ const vector<RuleParametric> ParametricGrammar::getRules(vector<string> ruleList
 // B(x)
 // the methods reurns a map like this:
 // {"A(x,y)" => "x,y", "B(x)" => x}
-const map<string,vector<string>> ParametricGrammar::getVarNamesOutOfRules(vector<RuleParametric> rulesContainer){
+const map<string,vector<string>> ofxLSGrammarParametric::getVarNamesOutOfRules(vector<ofxLSGRuleParametric> rulesContainer){
     map<string,vector<string>>predContainer;
     for(auto const rule:rulesContainer){
         auto predString = rule.getPredecessor();
@@ -140,9 +138,8 @@ const map<string,vector<string>> ParametricGrammar::getVarNamesOutOfRules(vector
 // putting both of them in a container
 // TODO, you still have to consider the case where the condition contains two
 // bool, example "t==2 && s>=3"
-// TODO, you have to consider the case where there is no condition. Example page 47 The Alg. beauty of Nature
-const vector<string> ParametricGrammar::getPredecessorAndCondition(string str){
-    auto stringRules = Sanitizer::removeSpacesAndNewlines(str);
+const vector<string> ofxLSGrammarParametric::getPredecessorAndCondition(string str){
+    auto stringRules = ofxLSGSanitizer::removeSpacesAndNewlines(str);
     vector<string> predecessor_and_condition;
     auto parts = ofSplitString(stringRules, ":");
     predecessor_and_condition.push_back(parts.at(0));
@@ -159,9 +156,9 @@ const vector<string> ParametricGrammar::getPredecessorAndCondition(string str){
 //     "A": <2.0>
 //     "B": <4.0, 4.0>
 // }
-vector<pair<string,vector<float>>> ParametricGrammar::getModules(string axiom){
+vector<pair<string,vector<float>>> ofxLSGrammarParametric::getModules(string axiom){
     vector<pair<string,vector<float>>> modules;
-    auto parts = Utils::getModulesFromString(axiom);
+    auto parts = ofxLSGUtils::getModulesFromString(axiom);
     for(auto part:parts){
         if (part.length() == 0) continue;
         string key;
@@ -175,14 +172,13 @@ vector<pair<string,vector<float>>> ParametricGrammar::getModules(string axiom){
             }
         }
         modules.push_back(make_pair(key,values));
-        //modules[key] = values;
     }
     return modules;
 }
 
 /////////////// CONDITIONS //////////////
 
-bool ParametricGrammar::conditionsForReproductionAreMet(RuleParametric rule, pair<string, map<string,float>> module){
+bool ofxLSGrammarParametric::conditionsForReproductionAreMet(ofxLSGRuleParametric rule, pair<string, map<string,float>> module){
     // A reproduction take place if all of these 3 conditions are met:
     // 1) the letter in the module and the letter in the predecessor are the same
     // 2) The number of actual parameter in the module is eqaul to the number of formal parameter in the predecessor
@@ -193,7 +189,7 @@ bool ParametricGrammar::conditionsForReproductionAreMet(RuleParametric rule, pai
     return parametersAndLettersMatch(rule, module) && conditionsAreOk;
 }
 
-bool ParametricGrammar::conditionsAreTrue(vector<Condition> conditions, pair<string, map<string,float>> module){
+bool ofxLSGrammarParametric::conditionsAreTrue(vector<ofxLSGCondition> conditions, pair<string, map<string,float>> module){
     unsigned int count_falses = 0;
     for(auto condition:conditions){
         if(!condition.isTrue(module.second)){
@@ -203,7 +199,7 @@ bool ParametricGrammar::conditionsAreTrue(vector<Condition> conditions, pair<str
     return count_falses == 0;
 }
 
-bool ParametricGrammar::predecessorMatchModules(pair<string,vector<string>> predecessor, pair<string,vector<float>> module){
+bool ofxLSGrammarParametric::predecessorMatchModules(pair<string,vector<string>> predecessor, pair<string,vector<float>> module){
     // 1) the letter in the module and the letter in the predecessor are the same
     // 2) The number of actual parameter in the module is eqaul to the number of formal parameter in the predecessor
     bool letterInModuleIsEqualToLetterInPredecessor =
@@ -216,7 +212,7 @@ bool ParametricGrammar::predecessorMatchModules(pair<string,vector<string>> pred
     );
 }
 
-bool ParametricGrammar::parametersAndLettersMatch(RuleParametric rule, pair<string, map<string,float>> module){
+bool ofxLSGrammarParametric::parametersAndLettersMatch(ofxLSGRuleParametric rule, pair<string, map<string,float>> module){
     // 1) the letter in the module and the letter in the predecessor are the same
     // 2) The number of actual parameter in the module is eqaul to the number of formal parameter in the predecessor
     bool letterInModuleIsEqualToLetterInPredecessor =

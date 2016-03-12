@@ -1,6 +1,6 @@
-#include "StandardGrammar.h"
+#include "ofxLSGrammarStandard.h"
 
-string StandardGrammar::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
+string ofxLSGrammarStandard::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
     string finalSentence = _axiom;
     auto ruleList = getRules(ruleListString);
     for(unsigned int i = 0; i< _numberOfSteps; i++){
@@ -9,14 +9,14 @@ string StandardGrammar::generateSentence(vector<string> ruleListString, int _num
     return finalSentence;
 }
 
-vector<RuleStandard> StandardGrammar::getRules(vector<string> ruleList){
-    vector<RuleStandard> rulesContainer;
+vector<RuleStandard> ofxLSGrammarStandard::getRules(vector<string> ruleList){
+    vector<ofxLSGRuleStandard> rulesContainer;
     for(auto rule:ruleList){
         auto parts = ofSplitString(rule, "->");
         if(parts.size()==2){
             auto axiom = Sanitizer::removeSpacesAndNewlines(parts.at(0))[0];
             auto rule = Sanitizer::removeSpacesAndNewlines(parts.at(1));
-            rulesContainer.push_back(RuleStandard(axiom, rule));
+            rulesContainer.push_back(ofxLSGRuleStandard(axiom, rule));
         }else{
             ofLogError("Standard Grammar detected, but rule not in the correct format");
         }
@@ -24,7 +24,7 @@ vector<RuleStandard> StandardGrammar::getRules(vector<string> ruleList){
     return rulesContainer;
 }
 
-string StandardGrammar::rewriteSentence(string _currentSentence, vector<RuleStandard> ruleList) {
+string ofxLSGrammarStandard::rewriteSentence(string _currentSentence, vector<ofxLSGRuleStandard> ruleList) {
     string nextSentence = "";
     bool firstReplacementDone = false;
     for( int i=0; i<_currentSentence.length(); i++ ){
@@ -40,6 +40,3 @@ string StandardGrammar::rewriteSentence(string _currentSentence, vector<RuleStan
     }
     return nextSentence;
 }
-
-//make a default method that returns the srtring generated starting
-// from this rule RuleStandard('F',"F");

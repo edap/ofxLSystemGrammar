@@ -1,7 +1,7 @@
 #pragma once
 #include <regex>
 
-class Utils{
+class ofxLSGUtils{
 public:
     static int countSubstring(const std::string& str, const std::string& sub){
         if (sub.length() == 0) return 0;

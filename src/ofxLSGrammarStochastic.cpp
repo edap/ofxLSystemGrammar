@@ -1,9 +1,9 @@
-#include "StochasticGrammar.h"
+#include "ofxLSGrammarStochastic.h"
 
-string StochasticGrammar::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
+string ofxLSGrammarStochastic::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
     string finalSentence = _axiom;
-    vector<RuleStochastic> ruleList = getRules(ruleListString);
-    if(Sanitizer::isProbabilityValid(ruleList)){
+    vector<ofxLSGRuleStochastic> ruleList = getRules(ruleListString);
+    if(ofxLSGSanitizer::isProbabilityValid(ruleList)){
         auto rulesWithProbability = buildRuleRange(ruleList);
         for(unsigned int i = 0; i< _numberOfSteps; i++){
             finalSentence = rewriteSentenceStochastic(finalSentence, rulesWithProbability);
@@ -12,15 +12,15 @@ string StochasticGrammar::generateSentence(vector<string> ruleListString, int _n
     return finalSentence;
 }
 
-vector<RuleStochastic> StochasticGrammar::getRules(vector<string> ruleList){
-    vector<RuleStochastic> rulesContainer;
+vector<ofxLSGRuleStochastic> ofxLSGrammarStochastic::getRules(vector<string> ruleList){
+    vector<ofxLSGRuleStochastic> rulesContainer;
     for(auto rule:ruleList){
         auto parts = ofSplitString(rule, "->");
         if(parts.size()==3){
-            auto probability = Sanitizer::removeSpacesAndNewlines(parts.at(0));
-            auto axiom = Sanitizer::removeSpacesAndNewlines(parts.at(1))[0];
-            auto rule = Sanitizer::removeSpacesAndNewlines(parts.at(2));
-            rulesContainer.push_back(RuleStochastic(axiom, rule, stof(probability)));
+            auto probability = ofxLSGSanitizer::removeSpacesAndNewlines(parts.at(0));
+            auto axiom = ofxLSGSanitizer::removeSpacesAndNewlines(parts.at(1))[0];
+            auto rule = ofxLSGSanitizer::removeSpacesAndNewlines(parts.at(2));
+            rulesContainer.push_back(ofxLSGRuleStochastic(axiom, rule, stof(probability)));
         }else{
             ofLogError("Stochastic Grammar detected, but rule not in the correct format");
         }
@@ -28,7 +28,7 @@ vector<RuleStochastic> StochasticGrammar::getRules(vector<string> ruleList){
     return rulesContainer;
 }
 
-string StochasticGrammar::rewriteSentenceStochastic(string _currentSentence, const map<float,RuleStochastic> rulesMap) {
+string ofxLSGrammarStochastic::rewriteSentenceStochastic(string _currentSentence, const map<float,ofxLSGRuleStochastic> rulesMap) {
     string nextSentence = "";
     bool firstReplacementDone = false;
     float randomIndex = ofRandom(0.99);
@@ -44,8 +44,8 @@ string StochasticGrammar::rewriteSentenceStochastic(string _currentSentence, con
     return nextSentence;
 }
 
-const map<float, RuleStochastic> StochasticGrammar::buildRuleRange(vector<RuleStochastic> ruleList){
-    map<float, RuleStochastic> rulesWithProbability;
+const map<float, ofxLSGRuleStochastic> ofxLSGrammarStochastic::buildRuleRange(vector<ofxLSGRuleStochastic> ruleList){
+    map<float, ofxLSGRuleStochastic> rulesWithProbability;
     float maxBound = 0.0;
     for (auto r : ruleList){
         maxBound += r.probability;

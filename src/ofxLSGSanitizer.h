@@ -1,12 +1,12 @@
 #pragma once
 #include "ofMain.h"
-#include "RuleStochastic.h"
-#include "Utils.h"
+#include "ofxLSGRuleStochastic.h"
+#include "ofxLSGUtils.h"
 
-class Sanitizer{
+class ofxLSGSanitizer{
 public:
     static bool   isRuleValid(string rule);
-    static bool   isProbabilityValid(vector<RuleStochastic> ruleList);
+    static bool   isProbabilityValid(vector<ofxLSGRuleStochastic> ruleList);
     static string removeSpacesAndNewlines(string str);
     static bool   roundBracketsAreClosed(string str);
 private:

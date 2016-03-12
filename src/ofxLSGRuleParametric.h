@@ -4,12 +4,14 @@
 #include "ofxLSGCondition.h"
 #include "ofxLSGOperation.h"
 
+typedef pair<string,vector<ofxLSGOperation>> Successor;
+
 class ofxLSGRuleParametric{
 public:
     ofxLSGRuleParametric( string _predecessor,  string _conditions, string _successor);
     string getPredecessor() const;
     vector<ofxLSGCondition> getConditions() const;
-    vector<pair<string,vector<ofxLSGOperation>>> getSuccessor() const;
+    vector<Successor> getSuccessor() const;
     vector<string> getPredecessorParameters() const;
 private:
     string predecessor;
@@ -17,11 +19,11 @@ private:
     vector<string> predecessorLetters;
     vector<ofxLSGCondition> conditions;
     vector<string> successorModules;
-    vector<pair<string,vector<ofxLSGOperation>>> successor;
+    vector<Successor> successor;
 
     vector<string> getPredecessorLetters() const; //not used
     vector<ofxLSGCondition> setConditions(string condition) const;
     vector<string> getSuccessorModules(string successor) const;
     vector<ofxLSGOperation> getOperationsInModule(string module) const;
-    vector<pair<string,vector<ofxLSGOperation>>> setSuccessor(string successor) const;
+    vector<Successor> setSuccessor(string successor) const;
 };

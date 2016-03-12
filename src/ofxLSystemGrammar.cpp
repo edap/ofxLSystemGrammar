@@ -6,7 +6,7 @@ const string ofxLSystemGrammar::buildSentence(string rules, const int _n_steps, 
     if(ofxLSGrammarDetector::isStochastic(stringRules)){
         finalSentence = ofxLSGrammarStochastic::generateSentence(stringRules, _n_steps, finalSentence);
     }else if(ofxLSGrammarDetector::isStandard(stringRules)) {
-        finalSentence = ofxGrammarStandard::generateSentence(stringRules, _n_steps, finalSentence);
+        finalSentence = ofxLSGrammarStandard::generateSentence(stringRules, _n_steps, finalSentence);
     }else if(ofxLSGrammarDetector::isParametric(stringRules)) {
         finalSentence = ofxLSGrammarParametric::generateSentence(stringRules, _n_steps, finalSentence);
     }else{
@@ -24,13 +24,13 @@ vector<string> ofxLSystemGrammar::putStringInContainer(string rules){
         auto rule_container = ofSplitString(rules, ";");
         for(auto r:rule_container){
             string cleaned = ofxLSGSanitizer::removeSpacesAndNewlines(r);
-            if (cleaned.length()>0 && Sanitizer::isRuleValid(cleaned)){
+            if (cleaned.length()>0 && ofxLSGSanitizer::isRuleValid(cleaned)){
                 stringRules.push_back(cleaned);
             }
         }
     }else{
         //single rule
-        if(rules.length()>0 && Sanitizer::isRuleValid(rules)){
+        if(rules.length()>0 && ofxLSGSanitizer::isRuleValid(rules)){
             stringRules.push_back(rules);
         }
     }

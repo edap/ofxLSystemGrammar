@@ -125,7 +125,7 @@ public:
         // big-regex: "\\([\\(\\)0-9a-z,\\.\\+\\*\\/-]+\\)"
         // match any group that starts with a ( and contains one or more of those:
         // ( and ),numbers and letters, commas, ., +, *, /, - and ends with )
-        auto parts = Utils::matchesInRegex(
+        auto parts = ofxLSGUtils::matchesInRegex(
                                            successor, "([A-Z](\\([\\(\\)0-9a-z,\\.\\+\\*\\/-]+\\))*)|(\\[[\\(\\)0-9a-zA-Z,\\.\\+\\*\\/-]+\\])"
                                            );
         return parts;

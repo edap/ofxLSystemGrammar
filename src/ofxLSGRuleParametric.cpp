@@ -33,7 +33,7 @@ vector<ofxLSGCondition> ofxLSGRuleParametric::setConditions(string _conditions) 
     vector<ofxLSGCondition> conditions;
     auto parts = ofSplitString(_conditions, "&&");
     for(auto part:parts){
-        conditions.push_back(Condition(part));
+        conditions.push_back(ofxLSGCondition(part));
     }
     return conditions;
 }
@@ -56,17 +56,17 @@ vector<pair<string,vector<ofxLSGOperation>>> ofxLSGRuleParametric::setSuccessor(
 // a vector containing the operations, (in this case only one), for that module
 vector<ofxLSGOperation> ofxLSGRuleParametric::getOperationsInModule(string module) const{
     vector<ofxLSGOperation> operations;
-    auto textInsideRounBrackets = Utils::matchesInRegex(module, "\\([A-Za-z0-9,\\.\\+\\*\\/-]+\\)");
+    auto textInsideRounBrackets = ofxLSGUtils::matchesInRegex(module, "\\([A-Za-z0-9,\\.\\+\\*\\/-]+\\)");
     for(auto stringOp:textInsideRounBrackets){
         //remove the first parenthesis
-        stringOp = Utils::stripFirstAndLastChar(stringOp);
+        stringOp = ofxLSGUtils::stripFirstAndLastChar(stringOp);
         if(ofxLSGUtils::countSubstring(stringOp, "(") > 0){
             ofLogError("Currently nested operation are not supported, it is not \
                        possible to process the string "+stringOp);
         }
         auto operationsString = ofSplitString(stringOp, ",");
         for(auto op:operationsString){
-            operations.push_back(Operation(op));
+            operations.push_back(ofxLSGOperation(op));
         }
     }
     return operations;

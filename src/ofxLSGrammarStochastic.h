@@ -1,13 +1,13 @@
 #pragma once
 #include "ofMain.h"
-#include "RuleStochastic.h"
-#include "Sanitizer.h"
+#include "ofxLSGRuleStochastic.h"
+#include "ofxLSGSanitizer.h"
 
-class StochasticGrammar {
+class ofxLSGrammarStochastic {
 public:
     static string         generateSentence(vector<string> ruleListString, int numberOfSteps, string axiom);
 private:
-    static vector<RuleStochastic> getRules(vector<string> ruleList);
-    static string                rewriteSentenceStochastic(string sentence, map<float,RuleStochastic>);
-    static const map<float,RuleStochastic> buildRuleRange(vector<RuleStochastic> ruleList);
+    static vector<ofxLSGRuleStochastic> getRules(vector<string> ruleList);
+    static string                       rewriteSentenceStochastic(string sentence, map<float,ofxLSGRuleStochastic>);
+    static const map<float,ofxLSGRuleStochastic> buildRuleRange(vector<ofxLSGRuleStochastic> ruleList);
 };

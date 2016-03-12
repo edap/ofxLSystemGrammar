@@ -108,7 +108,7 @@ const vector<ofxLSGRuleParametric> ofxLSGrammarParametric::getRules(vector<strin
             auto predecessor = predecessor_and_condition.at(0);
             auto condition = predecessor_and_condition.at(1);
             auto successor = ofxLSGSanitizer::removeSpacesAndNewlines(parts.at(1));
-            rulesContainer.push_back(RuleParametric(predecessor, condition, successor));
+            rulesContainer.push_back(ofxLSGRuleParametric(predecessor, condition, successor));
         }else{
             ofLogError("Parametric Grammar detected, but rule not in the correct format");
         }

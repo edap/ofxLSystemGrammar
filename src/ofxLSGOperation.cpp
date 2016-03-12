@@ -34,11 +34,11 @@ float ofxLSGOperation::resolveOperation(map<string,float> keysVals){
     string first = firstOperand_;
     string second = secondOperand_;
     for(auto keyVal:keysVals){
-        if(keyVal.first == firstOperand_ && Utils::isStringInRegex(firstOperand_, "[a-z]")){
+        if(keyVal.first == firstOperand_ && ofxLSGUtils::isStringInRegex(firstOperand_, "[a-z]")){
             first = ofToString(keyVal.second);
         }
 
-        if(keyVal.first == secondOperand_ && Utils::isStringInRegex(secondOperand_, "[a-z]")){
+        if(keyVal.first == secondOperand_ && ofxLSGUtils::isStringInRegex(secondOperand_, "[a-z]")){
             second = ofToString(keyVal.second);
         }
     }
@@ -57,17 +57,17 @@ float ofxLSGOperation::resolveOperation(map<string,float> keysVals){
 // Depending on which of the 3 supported operation is recognized, it initializes the
 // values for the operation
 void ofxLSGOperation::determinateOperationType(string str){
-    auto operands = Utils::matchesGroupsInRegex(str, "([a-zA-Z0-9\\.]+)(\\/|\\*|\\+|-)([a-zA-Z0-9\\.]+)");
+    auto operands = ofxLSGUtils::matchesGroupsInRegex(str, "([a-zA-Z0-9\\.]+)(\\/|\\*|\\+|-)([a-zA-Z0-9\\.]+)");
     if (operands.size() == 4) {
         // operation like x*3, or S/1.444
         firstOperand_ = operands.at(1);
         operator_     = operands.at(2);
         secondOperand_= operands.at(3);
     }else if(str.length() == 1){
-        if (Utils::grepStringInRegex(str, "[A-Za-z]").length() > 0){
+        if (ofxLSGUtils::grepStringInRegex(str, "[A-Za-z]").length() > 0){
             firstOperand_ = str;
             isASingleLetter = true;
-        }else if(Utils::grepStringInRegex(str, "[0-9\\.]+").length() > 0){
+        }else if(ofxLSGUtils::grepStringInRegex(str, "[0-9\\.]+").length() > 0){
             firstOperand_ = str;
             isASingleNumber = true;
         }else{

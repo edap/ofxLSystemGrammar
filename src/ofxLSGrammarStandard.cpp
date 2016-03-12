@@ -9,13 +9,13 @@ string ofxLSGrammarStandard::generateSentence(vector<string> ruleListString, int
     return finalSentence;
 }
 
-vector<RuleStandard> ofxLSGrammarStandard::getRules(vector<string> ruleList){
+vector<ofxLSGRuleStandard> ofxLSGrammarStandard::getRules(vector<string> ruleList){
     vector<ofxLSGRuleStandard> rulesContainer;
     for(auto rule:ruleList){
         auto parts = ofSplitString(rule, "->");
         if(parts.size()==2){
-            auto axiom = Sanitizer::removeSpacesAndNewlines(parts.at(0))[0];
-            auto rule = Sanitizer::removeSpacesAndNewlines(parts.at(1));
+            auto axiom = ofxLSGSanitizer::removeSpacesAndNewlines(parts.at(0))[0];
+            auto rule = ofxLSGSanitizer::removeSpacesAndNewlines(parts.at(1));
             rulesContainer.push_back(ofxLSGRuleStandard(axiom, rule));
         }else{
             ofLogError("Standard Grammar detected, but rule not in the correct format");

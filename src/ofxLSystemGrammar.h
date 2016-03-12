@@ -17,4 +17,4 @@ class ofxLSystemGrammar {
     static const string buildSentence(string _rules, const int _n_steps, string _axiom);
   private:
     static vector<string> putStringInContainer(string _str);
-}
+};

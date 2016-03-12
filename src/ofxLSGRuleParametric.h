@@ -4,7 +4,7 @@
 #include "ofxLSGCondition.h"
 #include "ofxLSGOperation.h"
 
-class ofxLSGRuleParametric: public Rule{
+class ofxLSGRuleParametric{
 public:
     ofxLSGRuleParametric( string _predecessor,  string _conditions, string _successor);
     string getPredecessor() const;

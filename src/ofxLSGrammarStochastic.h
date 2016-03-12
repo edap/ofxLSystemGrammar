@@ -5,7 +5,7 @@
 
 class ofxLSGrammarStochastic {
 public:
-    static string         generateSentence(vector<string> ruleListString, int numberOfSteps, string axiom);
+    static string generateSentence(vector<string> ruleListString, int numberOfSteps, string axiom);
 private:
     static vector<ofxLSGRuleStochastic> getRules(vector<string> ruleList);
     static string                       rewriteSentenceStochastic(string sentence, map<float,ofxLSGRuleStochastic>);

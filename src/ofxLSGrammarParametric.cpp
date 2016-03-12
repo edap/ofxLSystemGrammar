@@ -51,10 +51,10 @@ string ofxLSGrammarParametric::rewriteSentence(string axiom, vector<ofxLSGRulePa
 // if we have a module that is simply C, and all the predecessors does not mentions
 // how this moudle should or should not reproduce itself, we simply leave it as it is
 // and we forward it to the next generation
-vector<pair <string, map<string, float>>> ofxLSGrammarParametric::initializeMap(
-    vector<pair<string,vector<float>>> modules, vector<ofxLSGRuleParametric> rulesContainer)
+vector<ModuleMapped> ofxLSGrammarParametric::initializeMap(
+    vector<Module> modules, vector<ofxLSGRuleParametric> rulesContainer)
     {
-    vector<pair <string, map<string, float>>> initializedMap;
+    vector<ModuleMapped> initializedMap;
     auto predContainer = getVarNamesOutOfRules(rulesContainer);
 
     for(auto const module:modules){
@@ -79,7 +79,7 @@ vector<pair <string, map<string, float>>> ofxLSGrammarParametric::initializeMap(
     return initializedMap;
 }
 
-const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(map<string,vector<string>> predecessors, pair<string,vector<float>> module){
+const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(map<string,vector<string>> predecessors, Module module){
     for(auto pred:predecessors){
         if(ofIsStringInString(pred.first, module.first)){
             return false;
@@ -88,7 +88,7 @@ const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(map<string,v
     return true;
 };
 
-const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(vector<ofxLSGRuleParametric> ruleContainer, pair <string, map<string, float>> module){
+const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(vector<ofxLSGRuleParametric> ruleContainer, ModuleMapped module){
     for(auto rule:ruleContainer){
         if(ofIsStringInString(rule.getPredecessor(), module.first)){
             return false;
@@ -156,8 +156,8 @@ const vector<string> ofxLSGrammarParametric::getPredecessorAndCondition(string s
 //     "A": <2.0>
 //     "B": <4.0, 4.0>
 // }
-vector<pair<string,vector<float>>> ofxLSGrammarParametric::getModules(string axiom){
-    vector<pair<string,vector<float>>> modules;
+vector<Module> ofxLSGrammarParametric::getModules(string axiom){
+    vector<Module> modules;
     auto parts = ofxLSGUtils::getModulesFromString(axiom);
     for(auto part:parts){
         if (part.length() == 0) continue;
@@ -178,7 +178,7 @@ vector<pair<string,vector<float>>> ofxLSGrammarParametric::getModules(string axi
 
 /////////////// CONDITIONS //////////////
 
-bool ofxLSGrammarParametric::conditionsForReproductionAreMet(ofxLSGRuleParametric rule, pair<string, map<string,float>> module){
+bool ofxLSGrammarParametric::conditionsForReproductionAreMet(ofxLSGRuleParametric rule, ModuleMapped module){
     // A reproduction take place if all of these 3 conditions are met:
     // 1) the letter in the module and the letter in the predecessor are the same
     // 2) The number of actual parameter in the module is eqaul to the number of formal parameter in the predecessor
@@ -189,7 +189,7 @@ bool ofxLSGrammarParametric::conditionsForReproductionAreMet(ofxLSGRuleParametri
     return parametersAndLettersMatch(rule, module) && conditionsAreOk;
 }
 
-bool ofxLSGrammarParametric::conditionsAreTrue(vector<ofxLSGCondition> conditions, pair<string, map<string,float>> module){
+bool ofxLSGrammarParametric::conditionsAreTrue(vector<ofxLSGCondition> conditions, ModuleMapped module){
     unsigned int count_falses = 0;
     for(auto condition:conditions){
         if(!condition.isTrue(module.second)){
@@ -199,7 +199,7 @@ bool ofxLSGrammarParametric::conditionsAreTrue(vector<ofxLSGCondition> condition
     return count_falses == 0;
 }
 
-bool ofxLSGrammarParametric::predecessorMatchModules(pair<string,vector<string>> predecessor, pair<string,vector<float>> module){
+bool ofxLSGrammarParametric::predecessorMatchModules(pair<string,vector<string>> predecessor, Module module){
     // 1) the letter in the module and the letter in the predecessor are the same
     // 2) The number of actual parameter in the module is eqaul to the number of formal parameter in the predecessor
     bool letterInModuleIsEqualToLetterInPredecessor =
@@ -212,7 +212,7 @@ bool ofxLSGrammarParametric::predecessorMatchModules(pair<string,vector<string>>
     );
 }
 
-bool ofxLSGrammarParametric::parametersAndLettersMatch(ofxLSGRuleParametric rule, pair<string, map<string,float>> module){
+bool ofxLSGrammarParametric::parametersAndLettersMatch(ofxLSGRuleParametric rule, ModuleMapped module){
     // 1) the letter in the module and the letter in the predecessor are the same
     // 2) The number of actual parameter in the module is eqaul to the number of formal parameter in the predecessor
     bool letterInModuleIsEqualToLetterInPredecessor =

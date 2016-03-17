@@ -1,13 +1,14 @@
 #include "ofxLSGrammarParametric.h"
 
-string ofxLSGrammarParametric::generateSentence(vector<string> ruleList, int _numberOfSteps, string _axiom){
-    string finalSentence = _axiom;
-    auto rulesContainer = getRules(ruleList);
+vector<string> ofxLSGrammarParametric::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
+    vector<string> finalSentence;
+    finalSentence.push_back(_axiom);
 
-    //for(unsigned int i = 0; i< _numberOfSteps; i++){
-    for(unsigned int i = 0; i< 4; i++){
-        finalSentence =  rewriteSentence(finalSentence, rulesContainer);
-        cout << finalSentence << endl;
+    auto ruleList = getRules(ruleListString);
+    for(unsigned int i = 0; i< _numberOfSteps; i++){
+        auto currentString = finalSentence.back();
+        auto nextSentence = rewriteSentence(currentString, ruleList);
+        finalSentence.push_back(nextSentence);
     }
     return finalSentence;
 }

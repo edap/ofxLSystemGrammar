@@ -1,6 +1,6 @@
 #include "ofxLSystemGrammar.h"
 
-const string ofxLSystemGrammar::buildSentence(string rules, const int _n_steps, string _axiom){
+const vector<string> ofxLSystemGrammar::buildSentences(string rules, const int _n_steps, string _axiom){
     vector<string> stringRules = putStringInContainer(rules);
     string finalSentence = _axiom;
     if(ofxLSGrammarDetector::isStochastic(stringRules)){

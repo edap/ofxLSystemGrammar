@@ -1,10 +1,14 @@
 #include "ofxLSGrammarStandard.h"
 
-string ofxLSGrammarStandard::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
-    string finalSentence = _axiom;
+vector<string> ofxLSGrammarStandard::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
+    vector<string> finalSentence;
+    finalSentence.push_back(_axiom);
+
     auto ruleList = getRules(ruleListString);
     for(unsigned int i = 0; i< _numberOfSteps; i++){
-        finalSentence = rewriteSentence(finalSentence, ruleList);
+        auto currentString = finalSentence.back();
+        auto nextSentence = rewriteSentence(currentString, ruleList);
+        finalSentence.push_back(nextSentence);
     }
     return finalSentence;
 }

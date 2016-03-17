@@ -2,17 +2,17 @@
 
 const vector<string> ofxLSystemGrammar::buildSentences(string rules, const int _n_steps, string _axiom){
     vector<string> stringRules = putStringInContainer(rules);
-    string finalSentence = _axiom;
+    vector<string> finalSentence;
     if(ofxLSGrammarDetector::isStochastic(stringRules)){
-        finalSentence = ofxLSGrammarStochastic::generateSentence(stringRules, _n_steps, finalSentence);
+        finalSentence = ofxLSGrammarStochastic::generateSentence(stringRules, _n_steps, _axiom);
     }else if(ofxLSGrammarDetector::isStandard(stringRules)) {
-        finalSentence = ofxLSGrammarStandard::generateSentence(stringRules, _n_steps, finalSentence);
+        finalSentence = ofxLSGrammarStandard::generateSentence(stringRules, _n_steps, _axiom);
     }else if(ofxLSGrammarDetector::isParametric(stringRules)) {
-        finalSentence = ofxLSGrammarParametric::generateSentence(stringRules, _n_steps, finalSentence);
+        finalSentence = ofxLSGrammarParametric::generateSentence(stringRules, _n_steps, _axiom);
     }else{
         //do not brake
         ofLogError("It is not possible to detect the grammar type");
-        finalSentence = "FF";
+        finalSentence.push_back("FF");
     }
     return finalSentence;
 }

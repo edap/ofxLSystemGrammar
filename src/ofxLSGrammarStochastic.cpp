@@ -1,12 +1,15 @@
 #include "ofxLSGrammarStochastic.h"
 
-string ofxLSGrammarStochastic::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
-    string finalSentence = _axiom;
+vector<string> ofxLSGrammarStochastic::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
+    vector<string> finalSentence;
+    finalSentence.push_back(_axiom);
     vector<ofxLSGRuleStochastic> ruleList = getRules(ruleListString);
     if(ofxLSGSanitizer::isProbabilityValid(ruleList)){
         auto rulesWithProbability = buildRuleRange(ruleList);
         for(unsigned int i = 0; i< _numberOfSteps; i++){
-            finalSentence = rewriteSentenceStochastic(finalSentence, rulesWithProbability);
+            auto currentSentence = finalSentence.back();
+            auto nextSentence = rewriteSentenceStochastic(currentSentence, rulesWithProbability);
+            finalSentence.push_back(nextSentence);
         }
     }
     return finalSentence;

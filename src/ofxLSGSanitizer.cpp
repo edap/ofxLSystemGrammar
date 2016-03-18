@@ -49,8 +49,12 @@ string ofxLSGSanitizer::removeSpacesAndNewlines(string str){
     //whitespace
     size_t first = str.find_first_not_of(' ');
     size_t last = str.find_last_not_of(' ');
-    str = str.substr(first, (last-first+1));
-    //newlines
-    str.erase(std::remove(str.begin(), str.end(), '\n'), str.end());
-    return str;
+    if(str.length() == 0){
+        return str;
+    }else{
+        str = str.substr(first, (last-first+1));
+        //newlines
+        str.erase(std::remove(str.begin(), str.end(), '\n'), str.end());
+        return str;
+    }
 }

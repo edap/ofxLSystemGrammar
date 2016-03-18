@@ -119,7 +119,7 @@ public:
         //  N(*)
         //  [+A(s/R)]
         // Explanation. This regex consist of 2 groups, separated by the |. The first group match everything except the
-        // last part [+A(s/R)]. This part is matched by the second group. Let's see only the first group.
+        // last part "[+A(s/R)]", that is matched by the second group. Let's see only the first group.
         // "[A-Z](big-regex)*" this means take any string that start with a capital letter, follow by zero or more
         // elements that match the big-regex
         // big-regex: "\\([\\(\\)0-9a-z,\\.\\+\\*\\/-]+\\)"

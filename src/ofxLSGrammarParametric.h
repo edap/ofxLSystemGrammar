@@ -9,7 +9,7 @@ typedef pair<string, map<string, float>> ModuleMapped; // like A{x:1.0, y: 2.0}
 
 class ofxLSGrammarParametric {
 public:
-    static vector<string> generateSentence(vector<string> ruleList, int numberOfSteps, string sentence);
+    static vector<string> generateSentence(vector<string> ruleList, int numberOfSteps, string sentence, map<string,float> _constants);
 private:
     static string rewriteSentence(string currentSentence, vector<ofxLSGRuleParametric>);
     static const vector<ofxLSGRuleParametric> getRules(vector<string> ruleList);

@@ -1,14 +1,14 @@
 #include "ofxLSystemGrammar.h"
 
-const vector<string> ofxLSystemGrammar::buildSentences(string rules, const int _n_steps, string _axiom){
+const vector<string> ofxLSystemGrammar::buildSentences(string rules, const int _n_steps, string _axiom, map<string,float> _constants){
     vector<string> stringRules = putStringInContainer(rules);
     vector<string> finalSentence;
     if(ofxLSGrammarDetector::isStochastic(stringRules)){
-        finalSentence = ofxLSGrammarStochastic::generateSentence(stringRules, _n_steps, _axiom);
+        finalSentence = ofxLSGrammarStochastic::generateSentence(stringRules, _n_steps, _axiom, _constants);
     }else if(ofxLSGrammarDetector::isStandard(stringRules)) {
-        finalSentence = ofxLSGrammarStandard::generateSentence(stringRules, _n_steps, _axiom);
+        finalSentence = ofxLSGrammarStandard::generateSentence(stringRules, _n_steps, _axiom, _constants);
     }else if(ofxLSGrammarDetector::isParametric(stringRules)) {
-        finalSentence = ofxLSGrammarParametric::generateSentence(stringRules, _n_steps, _axiom);
+        finalSentence = ofxLSGrammarParametric::generateSentence(stringRules, _n_steps, _axiom, _constants);
     }else{
         //do not brake
         ofLogError("It is not possible to detect the grammar type");

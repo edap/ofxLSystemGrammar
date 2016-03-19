@@ -1,6 +1,6 @@
 #include "ofxLSGrammarStandard.h"
 
-vector<string> ofxLSGrammarStandard::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom){
+vector<string> ofxLSGrammarStandard::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom, map<string,float> _constants){
     vector<string> finalSentence;
     finalSentence.push_back(_axiom);
 

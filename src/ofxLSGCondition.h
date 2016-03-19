@@ -12,5 +12,6 @@ public:
 private:
     string letter;
     string comparisonOperator;
+    bool isAnEmptyCondition() const;
     float value;
 };

@@ -27,15 +27,19 @@ const bool ofxLSGrammarDetector::isStandard(vector<string> ruleList){
 }
 
 const bool ofxLSGrammarDetector::isParametric(vector<string> ruleList){
-    // An expected paramteric rule looks like this:
+    // An expected parametric can be of two types, one with condition:
     // A(x,y): y>3 -> B(x)A(x/y,0);
+    // and the other without condition, like
+    // A(x,y) -> B(x)A(x/y,0); In this second case, the programm will later create
+    // a condition that will be always evaluated as true
     auto parts = ofSplitString(ruleList[0], "->");
     bool two_parts = parts.size() == 2;
-    //It is parametric if it contains an integer enclosed in ()
-    bool is_there_a_one_column = ofxLSGUtils::countSubstring(ruleList[0], ":") == 1;
+    // It is parametric if it contains an integer enclosed in ()
+    // bool is_there_a_one_column = ofxLSGUtils::countSubstring(ruleList[0], ":") == 1;
     int n_round_brackets = ofxLSGUtils::countSubstring(ruleList[0], "(");
     bool round_brackets_present = n_round_brackets > 0;
-    if(two_parts && is_there_a_one_column && round_brackets_present){
+    //if(two_parts && is_there_a_one_column && round_brackets_present){
+    if(two_parts && round_brackets_present){
         return true;
     }
     return false;

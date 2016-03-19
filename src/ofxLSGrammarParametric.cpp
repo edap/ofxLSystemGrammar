@@ -136,16 +136,25 @@ const map<string,vector<string>> ofxLSGrammarParametric::getVarNamesOutOfRules(v
     return predContainer;
 }
 
-// This method takes a string containing a rule and separate the predecessor from the condition
-// putting both of them in a container
+// This method takes a string containing a rule and separate the predecessor from the condition. ex 'A(x,y): y<=3', A(x,y) is the predecessor and y<=3 is the condition
+// This method also consider the case where there is no condition. In this case
+// the condition will be an empty strig, that will be alsway evaluated as true
+
 // TODO, you still have to consider the case where the condition contains two
 // bool, example "t==2 && s>=3"
 const vector<string> ofxLSGrammarParametric::getPredecessorAndCondition(string str){
     auto stringRules = ofxLSGSanitizer::removeSpacesAndNewlines(str);
     vector<string> predecessor_and_condition;
     auto parts = ofSplitString(stringRules, ":");
-    predecessor_and_condition.push_back(parts.at(0));
-    predecessor_and_condition.push_back(parts.at(1));
+    //rule with condition
+    if(parts.size() == 2){
+        predecessor_and_condition.push_back(parts.at(0));
+        predecessor_and_condition.push_back(parts.at(1));
+    //rule without condition
+    }else{
+        predecessor_and_condition.push_back(parts.at(0));
+        predecessor_and_condition.push_back("");
+    }
     return predecessor_and_condition;
 }
 

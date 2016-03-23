@@ -12,6 +12,7 @@ public:
         rules = _ruleList;
         depth = _depth;
         expectedResult = _expectedResult;
+        constants = _constants;
     };
     string getTitle() const { return title; };
     string getAxiom() const { return axiom; };

@@ -4,7 +4,8 @@ void RuleTest::executeTest(){
     auto result = ofxLSystemGrammar::buildSentences(
                                                     this->getRules(),
                                                     this->getDepth(),
-                                                    this->getAxiom());
+                                                    this->getAxiom(),
+                                                    this->getConstants());
     this->setResult(result);
     passed = expectToBeEqual(this->getResult(), this->getExpectedResult());
 }

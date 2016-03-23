@@ -30,12 +30,15 @@ void ofApp::setup(){
     tests.push_back(parametricTest);
 
     // parametric test rule with constants
-    vector<string> expectedParametricWithConstantsResult{"A(1) -> F(1)[+A(1/R)][-A(1/R)]"};
+    vector<string> expectedParametricWithConstantsResult{
+        "A(1)",
+        "F(1)[+A(2)][-A(2)]"
+    };
     map<string, float> constants;
     constants.insert(make_pair("R", 0.5));
     auto parametricWithConstants = RuleTest("Parametric Grammar test with Constants",
                                    "A(1)",
-                                   "A(s) -> F(s)[+A(s/R)][-A(s/R)]",
+                                   "A(s)->F(s)[+A(s/R)][-A(s/R)]",
                                    1,
                                    expectedParametricWithConstantsResult,
                                    constants
@@ -66,7 +69,7 @@ void ofApp::draw(){
             }
             text += "\ngot: \n";
             for(auto r :test.getResult()){
-                text+= r;
+                text+= r+"\n";
             }
         }
         ofRectangle bounds = verdana14.getStringBoundingBox(text, 100, y);

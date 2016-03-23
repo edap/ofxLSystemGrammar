@@ -12,9 +12,11 @@
 #include "ofxLSGrammarStandard.h"
 #include "ofxLSGrammarParametric.h"
 
+typedef map<string,float> Constants;
+
 class ofxLSystemGrammar {
   public:
-    static const vector<string> buildSentences(string _rules, const int _n_steps, string _axiom, map<string,float> _constants);
+    static const vector<string> buildSentences(string _rules, const int _n_steps, string _axiom, map<string,float> _constants = Constants());
   private:
     static vector<string> putStringInContainer(string _str);
 };

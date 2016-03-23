@@ -6,7 +6,7 @@ typedef map<string, float> Constants;
 
 class RuleTest {
 public:
-    RuleTest(string _title, string _axiom, string _ruleList, int _depth, vector<string> _expectedResult){
+    RuleTest(string _title, string _axiom, string _ruleList, int _depth, vector<string> _expectedResult, Constants _constants = Constants()){
         title = _title;
         axiom = _axiom;
         rules = _ruleList;
@@ -16,6 +16,7 @@ public:
     string getTitle() const { return title; };
     string getAxiom() const { return axiom; };
     string getRules() const { return rules; };
+    Constants getConstants() const { return constants; };
     bool isPassed() const { return passed; };
     int getDepth() const { return depth; };
     vector<string> getExpectedResult() const { return expectedResult; };
@@ -27,6 +28,7 @@ private:
     string axiom;
     string rules;
     string title;
+    Constants constants;
     int depth;
     vector<string> expectedResult;
     vector<string> result;

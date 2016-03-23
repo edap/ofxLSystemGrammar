@@ -8,7 +8,11 @@ typedef pair<string,vector<ofxLSGOperation>> Successor;
 
 class ofxLSGRuleParametric{
 public:
-    ofxLSGRuleParametric( string _predecessor,  string _conditions, string _successor);
+    ofxLSGRuleParametric(
+                         string _predecessor,
+                         string _conditions,
+                         string _successor,
+                         map<string, float> _constants);
     string getPredecessor() const;
     vector<ofxLSGCondition> getConditions() const;
     vector<Successor> getSuccessor() const;
@@ -25,5 +29,5 @@ private:
     vector<ofxLSGCondition> setConditions(string condition) const;
     vector<string> getSuccessorModules(string successor) const;
     vector<ofxLSGOperation> getOperationsInModule(string module) const;
-    vector<Successor> setSuccessor(string successor) const;
+    vector<Successor> setSuccessor(string successor,map<string,float> _constants) const;
 };

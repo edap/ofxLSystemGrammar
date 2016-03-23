@@ -1,8 +1,12 @@
 #include <ofxLSGRuleParametric.h>
-ofxLSGRuleParametric::ofxLSGRuleParametric( string _predecessor,  string _conditions, string _successor){
+ofxLSGRuleParametric::ofxLSGRuleParametric(
+                                           string _predecessor,
+                                           string _conditions,
+                                           string _successor,
+                                           map<string,float> _constants){
     predecessor = _predecessor;
     conditions = setConditions(_conditions);
-    successor = setSuccessor(_successor);
+    successor = setSuccessor(_successor, _constants);
     predecessorParameters = getPredecessorParameters();
     predecessorLetters = getPredecessorLetters();
 };
@@ -38,7 +42,10 @@ vector<ofxLSGCondition> ofxLSGRuleParametric::setConditions(string _conditions) 
     return conditions;
 }
 
-vector<pair<string,vector<ofxLSGOperation>>> ofxLSGRuleParametric::setSuccessor(string _successor) const{
+vector<pair<string,vector<ofxLSGOperation>>> ofxLSGRuleParametric::setSuccessor(
+                                                            string _successor,
+                                                            map<string,float> _constants
+                                                                                ) const{
     auto successorModules = ofxLSGUtils::getModulesFromString(_successor);
     // grep operations
     // use the grepped kye as value for the operation object

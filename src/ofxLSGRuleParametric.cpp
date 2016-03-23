@@ -46,7 +46,8 @@ vector<pair<string,vector<ofxLSGOperation>>> ofxLSGRuleParametric::setSuccessor(
                                                             string _successor,
                                                             map<string,float> _constants
                                                                                 ) const{
-    auto successorModules = ofxLSGUtils::getModulesFromString(_successor);
+    auto successorWithConstants = replaceConstantsInModules(_successor, _constants);
+    auto successorModules = ofxLSGUtils::getModulesFromString(successorWithConstants);
     // grep operations
     // use the grepped kye as value for the operation object
     // calculate substitution if necessary. otherwise return
@@ -58,6 +59,18 @@ vector<pair<string,vector<ofxLSGOperation>>> ofxLSGRuleParametric::setSuccessor(
     }
     return successors;
 }
+
+string ofxLSGRuleParametric::replaceConstantsInModules(string successor, Constants _constants) const{
+    string result;
+    result = successor;
+    for(auto _constant : _constants){
+        auto key  = _constant.first;
+        auto val = _constant.second;
+        ofStringReplace(result, key, ofToString(val));
+    }
+    return result;
+
+};
 
 //This method take a module like A(x+1), recognize that x+1 is an operation, and returns
 // a vector containing the operations, (in this case only one), for that module

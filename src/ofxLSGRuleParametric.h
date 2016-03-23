@@ -5,6 +5,7 @@
 #include "ofxLSGOperation.h"
 
 typedef pair<string,vector<ofxLSGOperation>> Successor;
+typedef map<string,float> Constants;
 
 class ofxLSGRuleParametric{
 public:
@@ -29,5 +30,6 @@ private:
     vector<ofxLSGCondition> setConditions(string condition) const;
     vector<string> getSuccessorModules(string successor) const;
     vector<ofxLSGOperation> getOperationsInModule(string module) const;
-    vector<Successor> setSuccessor(string successor,map<string,float> _constants) const;
+    string replaceConstantsInModules(string successor, Constants _constants) const;
+    vector<Successor> setSuccessor(string successor,Constants _constants) const;
 };

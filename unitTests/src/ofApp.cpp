@@ -4,14 +4,9 @@
 void ofApp::setup(){
     ofTrueTypeFont::setGlobalDpi(72);
     ofSetBackgroundColor(0, 0, 0);
-
     verdana14.load("verdana.ttf", 14, true, true);
     verdana14.setLineHeight(18.0f);
     verdana14.setLetterSpacing(1.037);
-
-    verdana30.load("verdana.ttf", 30, true, true);
-    verdana30.setLineHeight(34.0f);
-    verdana30.setLetterSpacing(1.035);
 
     //parametric test. Rules also in page 43 of "The Algorithmic Beauty of Plants"
     string parametricRules;
@@ -33,6 +28,17 @@ void ofApp::setup(){
                                    );
     parametricTest.executeTest();
     tests.push_back(parametricTest);
+
+    // parametric test rule with constants
+    vector<string> expectedParametricWithConstantsResult{"res"};
+    auto parametricWithConstants = RuleTest("Parametric Grammar test with Constants",
+                                   "A(1)",
+                                   "A(s) -> F(s)[+A(s/R)][-A(s/R)]",
+                                   1,
+                                   expectedParametricWithConstantsResult
+                                   );
+    parametricWithConstants.executeTest();
+    tests.push_back(parametricWithConstants);
 }
 
 //--------------------------------------------------------------
@@ -50,11 +56,19 @@ void ofApp::draw(){
             text = test.getTitle() += ": OK";
         }else{
             ofSetColor(255,0,0);
-            text = test.getTitle() += ": ERROR";
+            text = test.getTitle() += ": ERROR, expected:\n";
+            for(auto r :test.getExpectedResult()){
+                text+= r;
+            }
+            text += "\ngot: \n";
+            for(auto r :test.getResult()){
+                text+= r;
+            }
         }
+        ofRectangle bounds = verdana14.getStringBoundingBox(text, 100, y);
         auto passed = test.isPassed() ? "OK" : "ERROR";
         verdana14.drawString(text , 100, y );
-        y += 50;
+        y += bounds.height+5;
     }
 }
 

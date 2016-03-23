@@ -2,6 +2,8 @@
 #include "ofMain.h"
 #include "ofxLSystemGrammar.h"
 
+typedef map<string, float> Constants;
+
 class RuleTest {
 public:
     RuleTest(string _title, string _axiom, string _ruleList, int _depth, vector<string> _expectedResult){

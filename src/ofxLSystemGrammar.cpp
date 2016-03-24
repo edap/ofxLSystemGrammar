@@ -14,7 +14,6 @@ const vector<string> ofxLSystemGrammar::buildSentences(string rules, const int _
         ofLogError("It is not possible to detect the grammar type");
         finalSentence.push_back("FF");
     }
-    cout << finalSentence.back() << endl;
     return finalSentence;
 }
 

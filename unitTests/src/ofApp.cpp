@@ -36,10 +36,11 @@ void ofApp::setup(){
     };
     map<string, float> constants;
     constants.insert(make_pair("R", 0.5));
-    auto parametricWithConstants = RuleTest("Parametric Grammar test with Constants",
+    auto parametricWithConstants = RuleTest(
+                                   "Parametric Grammar test with Constants",
                                    "A(1)",
                                    "A(s)->F(s)[+A(s/R)][-A(s/R)]",
-                                   1,
+                                   2,
                                    expectedParametricWithConstantsResult,
                                    constants
                                    );
@@ -65,11 +66,11 @@ void ofApp::draw(){
             ofSetColor(255,0,0);
             text = test.getTitle() += ": ERROR, expected:\n";
             for(auto r :test.getExpectedResult()){
-                text+= r;
+                text+= r + "\n";
             }
             text += "\ngot: \n";
             for(auto r :test.getResult()){
-                text+= r+"\n";
+                text+= r + "\n";
             }
         }
         ofRectangle bounds = verdana14.getStringBoundingBox(text, 100, y);

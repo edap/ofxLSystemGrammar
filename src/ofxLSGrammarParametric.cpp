@@ -173,16 +173,18 @@ const vector<string> ofxLSGrammarParametric::getPredecessorAndCondition(string s
 vector<Module> ofxLSGrammarParametric::getModules(string axiom){
     vector<Module> modules;
     auto parts = ofxLSGUtils::getModulesFromString(axiom);
+
     for(auto part:parts){
-        if (part.length() == 0) continue;
         string key;
         vector<float> values;
-        for(auto letter:part){
-            if(isalpha(letter)){
-                key = ofToString(letter);
-            }
-            if(isdigit(letter)){
-                values.push_back(ofToFloat(ofToString(letter)));
+        auto letter = ofxLSGUtils::grepStringInRegex(part, "[A-Za-z]");
+        auto numbers = ofxLSGUtils::matchesInRegex(part, "[0-9\\.]+");
+        if (letter.length() > 0){
+            key = letter;
+        }
+        if(numbers.size() > 0){
+            for(auto number : numbers){
+                values.push_back(ofToFloat(number));
             }
         }
         modules.push_back(make_pair(key,values));

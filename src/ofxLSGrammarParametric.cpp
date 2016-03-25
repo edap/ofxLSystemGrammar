@@ -25,16 +25,6 @@ string ofxLSGrammarParametric::rewriteSentence(string axiom, vector<ofxLSGRulePa
             for(auto const rule:rulesContainer){
                 if(conditionsForReproductionAreMet(rule, module)){
                     fin += injectResults(rule, module);
-//                    for(auto successor : rule.getSuccessor()){
-//                        map<string, string> opResults;
-//                        for(auto op : successor.second){
-//                            float res = op.compute(module);
-//                            auto key = op.getKey();
-//                            opResults.insert(make_pair(key, ofToString(res)));
-//                        }
-//                        auto stringAfterOperation = ofxLSGUtils::mapCopyToString(opResults, successor.first);
-//                        fin += injectResults(rule, module);
-//                    }
                 }
             }
         }

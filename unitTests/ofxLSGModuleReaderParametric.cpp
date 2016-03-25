@@ -10,7 +10,8 @@
 // }
 // if we have a module that is simply C, and all the predecessors does not mentions
 // how this moudle should or should not reproduce itself, we simply leave it as it is
-// and we forward it to the next generation
+// and we forward it to the next generation.
+// if we have a module that is F(s), and it is not mentioned in the predecessor, we search it in the successors
 vector<ModuleMapped> ofxLSGModuleReaderParametric::initializeMap(
                                                            vector<Module> modules, vector<ofxLSGRuleParametric> rulesContainer)
 {
@@ -25,7 +26,7 @@ vector<ModuleMapped> ofxLSGModuleReaderParametric::initializeMap(
             modulesToSearchInSuccessor.push_back(module);
         }else{
             for(auto const predecessor:predContainer){
-                if(predecessorMatchModules(predecessor, module)){
+                if(matchModules(predecessor, module)){
                     auto predString = predecessor.first;
                     auto predecessorParameters = predecessor.second;
                     map<string, float> parAndVal;
@@ -46,7 +47,7 @@ vector<ModuleMapped> ofxLSGModuleReaderParametric::initializeMap(
             auto successors = rule.getSuccessorWithParameters();
 
             for (auto succ : successors){
-                if(predecessorMatchModules(succ, module)){
+                if(matchModules(succ, module)){
                     auto succString = succ.first;
                     auto successorParameters = succ.second;
                     map<string, float> parAndVal;
@@ -78,11 +79,10 @@ const map<string,vector<string>> ofxLSGModuleReaderParametric::getVarNamesOutOfR
         if (predContainer.count(predString)) continue;
         predContainer.insert(make_pair(predString, rule.getPredecessorParameters()));
     }
-
     return predContainer;
 }
 
-bool ofxLSGModuleReaderParametric::predecessorMatchModules(pair<string,vector<string>> predecessor, Module module){
+bool ofxLSGModuleReaderParametric::matchModules(pair<string,vector<string>> predecessor, Module module){
     // 1) the letter in the module and the letter in the predecessor are the same
     // 2) The number of actual parameter in the module is eqaul to the number of formal parameter in the predecessor
     bool letterInModuleIsEqualToLetterInPredecessor =
@@ -94,7 +94,6 @@ bool ofxLSGModuleReaderParametric::predecessorMatchModules(pair<string,vector<st
             numberParametersAreEqual
             );
 }
-
 
 const bool ofxLSGModuleReaderParametric::moduleNotMentionedInPredecessors(map<string,vector<string>> predecessors, Module module){
     for(auto pred:predecessors){

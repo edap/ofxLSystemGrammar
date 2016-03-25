@@ -11,6 +11,6 @@ public:
     static vector<ModuleMapped> initializeMap(vector<Module> modules, vector<ofxLSGRuleParametric> ruleContainer);
 
     static const map<string,vector<string>> getVarNamesOutOfRules(vector<ofxLSGRuleParametric> rulesContainer);
-    static bool predecessorMatchModules(pair<string,vector<string>>, Module module);
+    static bool matchModules(pair<string,vector<string>>, Module module);
     static const bool moduleNotMentionedInPredecessors(map<string,vector<string>> predecessors, Module module);
 };

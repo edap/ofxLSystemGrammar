@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/ofxLSGrammarParametric.cpp"
-            timestampString = "480593992.050922"
+            timestampString = "480601661.077427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "ofxLSGrammarParametric::getModules(string axiom)"
             landmarkType = "5">
             <Locations>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/ofxLSGrammarParametric.cpp"
-            timestampString = "480593992.050922"
+            timestampString = "480601661.077427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "ofxLSGrammarParametric::getModules(string axiom)"
             landmarkType = "5">
             <Locations>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/ofxLSGrammarParametric.cpp"
-            timestampString = "480593992.050922"
+            timestampString = "480601661.077427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "ofxLSGrammarParametric::getModules(string axiom)"
             landmarkType = "5">
          </BreakpointContent>
@@ -273,54 +273,6 @@
             endingLineNumber = "9"
             landmarkName = "ofxLSGRuleParametric::ofxLSGRuleParametric( string _predecessor, string _conditions, string _successor, map&lt;string,float&gt; _constants)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../src/ofxLSGrammarParametric.cpp"
-            timestampString = "480593992.050922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "ofxLSGrammarParametric::rewriteSentence(string axiom, vector&lt;ofxLSGRuleParametric&gt; rulesContainer)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ofxLSGrammarParametric::rewriteSentence(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;ofxLSGRuleParametric, std::__1::allocator&lt;ofxLSGRuleParametric&gt; &gt;)"
-                  moduleName = "unitTestsDebug"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/da1/Sources/OF/of_v0.9.3_osx_release/addons/ofxLSystemGrammar/src/ofxLSGrammarParametric.cpp"
-                  timestampString = "480531068.592413"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "7555">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ofxLSGrammarParametric::rewriteSentence(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;ofxLSGRuleParametric, std::__1::allocator&lt;ofxLSGRuleParametric&gt; &gt;)"
-                  moduleName = "unitTestsDebug"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/da1/Sources/OF/of_v0.9.3_osx_release/addons/ofxLSystemGrammar/src/ofxLSGrammarParametric.cpp"
-                  timestampString = "480531068.592687"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "8140">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -390,7 +342,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/ofxLSGrammarParametric.cpp"
@@ -403,6 +355,70 @@
             landmarkType = "5">
             <Locations>
                <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxLSGrammarParametric::rewriteSentence(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;ofxLSGRuleParametric, std::__1::allocator&lt;ofxLSGRuleParametric&gt; &gt;)"
+                  moduleName = "unitTestsDebug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/da1/Sources/OF/of_v0.9.3_osx_release/addons/ofxLSystemGrammar/src/ofxLSGrammarParametric.cpp"
+                  timestampString = "480601662.407628"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "385">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxLSGrammarParametric::rewriteSentence(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;ofxLSGRuleParametric, std::__1::allocator&lt;ofxLSGRuleParametric&gt; &gt;)"
+                  moduleName = "unitTestsDebug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/da1/Sources/OF/of_v0.9.3_osx_release/addons/ofxLSystemGrammar/src/ofxLSGrammarParametric.cpp"
+                  timestampString = "480601662.407893"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "788">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/ofxLSGrammarParametric.cpp"
+            timestampString = "480594490.639366"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "ofxLSGrammarParametric::rewriteSentence(string axiom, vector&lt;ofxLSGRuleParametric&gt; rulesContainer)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/ofxLSGrammarParametric.cpp"
+            timestampString = "480595487.332487"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "ofxLSGrammarParametric::rewriteSentence(string axiom, vector&lt;ofxLSGRuleParametric&gt; rulesContainer)"
+            landmarkType = "5">
+            <Locations>
+               <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -410,12 +426,12 @@
                   moduleName = "unitTestsDebug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/da1/Sources/OF/of_v0.9.3_osx_release/addons/ofxLSystemGrammar/src/ofxLSGrammarParametric.cpp"
-                  timestampString = "480533015.902525"
+                  timestampString = "480595487.335156"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "385">
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "5291">
                </Location>
                <Location
                   shouldBeEnabled = "No"
@@ -425,12 +441,12 @@
                   moduleName = "unitTestsDebug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/da1/Sources/OF/of_v0.9.3_osx_release/addons/ofxLSystemGrammar/src/ofxLSGrammarParametric.cpp"
-                  timestampString = "480533015.902829"
+                  timestampString = "480595487.335367"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "788">
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "5701">
                </Location>
             </Locations>
          </BreakpointContent>

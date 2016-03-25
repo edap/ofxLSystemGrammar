@@ -13,6 +13,7 @@ public:
     static vector<string> generateSentence(vector<string> ruleList, int numberOfSteps, string sentence, map<string,float> _constants);
 private:
     static string rewriteSentence(string currentSentence, vector<ofxLSGRuleParametric>);
+    static string injectResults(ofxLSGRuleParametric rule, ModuleMapped module);
     static const vector<ofxLSGRuleParametric> getRules(vector<string> ruleList,map<string,float> _constants);
     static const vector<string> getPredecessorAndCondition(string str);
     static vector<Module> getModules(string axiom);

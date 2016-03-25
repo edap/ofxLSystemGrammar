@@ -24,19 +24,35 @@ string ofxLSGrammarParametric::rewriteSentence(string axiom, vector<ofxLSGRulePa
         }else{
             for(auto const rule:rulesContainer){
                 if(conditionsForReproductionAreMet(rule, module)){
-                    for(auto successor : rule.getSuccessor()){
-                        map<string, string> opResults;
-                        for(auto op : successor.second){
-                            float res = op.compute(module);
-                            auto key = op.getKey();
-                            opResults.insert(make_pair(key, ofToString(res)));
-                        }
-                        auto stringAfterOperation = ofxLSGUtils::mapCopyToString(opResults, successor.first);
-                        fin += stringAfterOperation;
-                    }
+                    fin += injectResults(rule, module);
+//                    for(auto successor : rule.getSuccessor()){
+//                        map<string, string> opResults;
+//                        for(auto op : successor.second){
+//                            float res = op.compute(module);
+//                            auto key = op.getKey();
+//                            opResults.insert(make_pair(key, ofToString(res)));
+//                        }
+//                        auto stringAfterOperation = ofxLSGUtils::mapCopyToString(opResults, successor.first);
+//                        fin += injectResults(rule, module);
+//                    }
                 }
             }
         }
+    }
+    return fin;
+}
+
+string ofxLSGrammarParametric::injectResults(ofxLSGRuleParametric rule, ModuleMapped module){
+    string fin;
+    for(auto successor : rule.getSuccessor()){
+        map<string, string> opResults;
+        for(auto op : successor.second){
+            float res = op.compute(module);
+            auto key = op.getKey();
+            opResults.insert(make_pair(key, ofToString(res)));
+        }
+        string stringAfterOperation = ofxLSGUtils::mapCopyToString(opResults, successor.first);
+        fin += stringAfterOperation;
     }
     return fin;
 }

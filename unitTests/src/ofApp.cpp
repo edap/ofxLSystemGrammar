@@ -8,6 +8,26 @@ void ofApp::setup(){
     verdana14.setLineHeight(18.0f);
     verdana14.setLetterSpacing(1.037);
 
+
+    // parametric test rule with constants
+    vector<string> expectedParametricWithConstantsResult{
+        "A(12)",
+        "F(12)[+A(6)][-A(6)]",
+        "F(12)[+F(6)[+A(3)][-A(3)]][-F(6)[+A(3)][-A(3)]]"
+    };
+    map<string, float> constants;
+    constants.insert(make_pair("R", 2.0));
+    auto parametricWithConstants = RuleTest(
+                                   "Parametric Grammar test with Constants",
+                                   "A(12)",
+                                   "A(s)->F(s)[+A(s/R)][-A(s/R)]",
+                                   2,
+                                   expectedParametricWithConstantsResult,
+                                   constants
+                                   );
+    parametricWithConstants.executeTest();
+    tests.push_back(parametricWithConstants);
+
     //parametric test. Rules also in page 43 of "The Algorithmic Beauty of Plants"
     string parametricRules;
     parametricRules += "A(x,y): y<=3 -> A(x*2,x+y);";
@@ -28,24 +48,6 @@ void ofApp::setup(){
                                    );
     parametricTest.executeTest();
     tests.push_back(parametricTest);
-
-    // parametric test rule with constants
-    vector<string> expectedParametricWithConstantsResult{
-        "A(1)",
-        "F(1)[+A(2)][-A(2)]"
-    };
-    map<string, float> constants;
-    constants.insert(make_pair("R", 0.5));
-    auto parametricWithConstants = RuleTest(
-                                   "Parametric Grammar test with Constants",
-                                   "A(1)",
-                                   "A(s)->F(s)[+A(s/R)][-A(s/R)]",
-                                   2,
-                                   expectedParametricWithConstantsResult,
-                                   constants
-                                   );
-    parametricWithConstants.executeTest();
-    tests.push_back(parametricWithConstants);
 }
 
 //--------------------------------------------------------------

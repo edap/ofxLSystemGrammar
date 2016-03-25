@@ -1,22 +1,22 @@
 #include "ofxLSGrammarParametric.h"
 
 vector<string> ofxLSGrammarParametric::generateSentence(vector<string> ruleListString, int _numberOfSteps, string _axiom, map<string,float> _constants){
-    vector<string> finalSentence;
-    finalSentence.push_back(_axiom);
+    vector<string> finalSentences;
+    finalSentences.push_back(_axiom);
 
     auto ruleList = getRules(ruleListString, _constants);
     for(unsigned int i = 0; i< _numberOfSteps; i++){
-        auto currentString = finalSentence.back();
+        auto currentString = finalSentences.back();
         auto nextSentence = rewriteSentence(currentString, ruleList);
-        finalSentence.push_back(nextSentence);
+        finalSentences.push_back(nextSentence);
         cout << nextSentence << endl;
     }
-    return finalSentence;
+    return finalSentences;
 }
 
 string ofxLSGrammarParametric::rewriteSentence(string axiom, vector<ofxLSGRuleParametric> rulesContainer){
     auto modules = getModules(axiom);
-    auto currentIterationMap = initializeMap(modules, rulesContainer);
+    auto currentIterationMap = ofxLSGModuleReaderParametric::initializeMap(modules, rulesContainer);
     string fin = "";
     for(auto module:currentIterationMap ){
         if(moduleNotMentionedInPredecessors(rulesContainer, module)){
@@ -24,7 +24,7 @@ string ofxLSGrammarParametric::rewriteSentence(string axiom, vector<ofxLSGRulePa
         }else{
             for(auto const rule:rulesContainer){
                 if(conditionsForReproductionAreMet(rule, module)){
-                    for(auto successor:rule.getSuccessor()){
+                    for(auto successor : rule.getSuccessor()){
                         map<string, string> opResults;
                         for(auto op : successor.second){
                             float res = op.compute(module);
@@ -41,53 +41,6 @@ string ofxLSGrammarParametric::rewriteSentence(string axiom, vector<ofxLSGRulePa
     return fin;
 }
 
-// This method iterates through modules and rules in order to initialize a map
-// where the values are assigned to the params. For example, if we have a module
-// That is A(3,4) and the predecessor parameters for the module with key "A"
-// are x,y we initialize a map like this (pseudocode):
-// A:{
-// {x: 3},
-// {y: 4}
-// }
-// if we have a module that is simply C, and all the predecessors does not mentions
-// how this moudle should or should not reproduce itself, we simply leave it as it is
-// and we forward it to the next generation
-vector<ModuleMapped> ofxLSGrammarParametric::initializeMap(
-    vector<Module> modules, vector<ofxLSGRuleParametric> rulesContainer)
-    {
-    vector<ModuleMapped> initializedMap;
-    auto predContainer = getVarNamesOutOfRules(rulesContainer);
-
-    for(auto const module:modules){
-        if(moduleNotMentionedInPredecessors(predContainer, module)){
-            map<string, float> emptyMap;
-            initializedMap.push_back(make_pair(module.first,emptyMap));
-        }else{
-            for(auto const predecessor:predContainer){
-                if(predecessorMatchModules(predecessor, module)){
-                    auto predString = predecessor.first;
-                    auto predecessorParameters = predecessor.second;
-                    map<string, float> parAndVal;
-                    for(unsigned int i = 0; i < predecessorParameters.size(); i++){
-                        parAndVal.insert(make_pair(predecessorParameters.at(i),
-                                              module.second.at(i)));
-                    }
-                    initializedMap.push_back(make_pair(module.first,parAndVal));
-                }
-            }
-        }
-    }
-    return initializedMap;
-}
-
-const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(map<string,vector<string>> predecessors, Module module){
-    for(auto pred:predecessors){
-        if(ofIsStringInString(pred.first, module.first)){
-            return false;
-        }
-    }
-    return true;
-};
 
 const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(vector<ofxLSGRuleParametric> ruleContainer, ModuleMapped module){
     for(auto rule:ruleContainer){
@@ -121,23 +74,7 @@ const vector<ofxLSGRuleParametric> ofxLSGrammarParametric::getRules(vector<strin
     return rulesContainer;
 }
 
-// This function iterates throug all the rules and for each rule it takes out the predecessor
-// and its variable name. ex: If the rules are 4, and the predecessor are:
-// A(x,y)
-// A(x,y)
-// B(x)
-// B(x)
-// the methods reurns a map like this:
-// {"A(x,y)" => "x,y", "B(x)" => x}
-const map<string,vector<string>> ofxLSGrammarParametric::getVarNamesOutOfRules(vector<ofxLSGRuleParametric> rulesContainer){
-    map<string,vector<string>>predContainer;
-    for(auto const rule:rulesContainer){
-        auto predString = rule.getPredecessor();
-        if (predContainer.count(predString)) continue;
-        predContainer.insert(make_pair(predString, rule.getPredecessorParameters()));
-    }
-    return predContainer;
-}
+
 
 // This method takes a string containing a rule and separate the predecessor from the condition. ex 'A(x,y): y<=3', A(x,y) is the predecessor and y<=3 is the condition
 // This method also consider the case where there is no condition. In this case
@@ -213,19 +150,6 @@ bool ofxLSGrammarParametric::conditionsAreTrue(vector<ofxLSGCondition> condition
         }
     }
     return count_falses == 0;
-}
-
-bool ofxLSGrammarParametric::predecessorMatchModules(pair<string,vector<string>> predecessor, Module module){
-    // 1) the letter in the module and the letter in the predecessor are the same
-    // 2) The number of actual parameter in the module is eqaul to the number of formal parameter in the predecessor
-    bool letterInModuleIsEqualToLetterInPredecessor =
-    predecessor.first.find(module.first) != string::npos;
-    bool numberParametersAreEqual =
-    predecessor.second.size() == module.second.size();
-    return (
-            letterInModuleIsEqualToLetterInPredecessor &&
-            numberParametersAreEqual
-    );
 }
 
 bool ofxLSGrammarParametric::parametersAndLettersMatch(ofxLSGRuleParametric rule, ModuleMapped module){

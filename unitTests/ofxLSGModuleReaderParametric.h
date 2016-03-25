@@ -1,14 +1,16 @@
-//
-//  ofxLSGModuleReaderParametric.hpp
-//  unitTests
-//
-//  Created by DavidePrati on 25/03/16.
-//
-//
+#pragma once
+#include "ofMain.h"
+#include "ofxLSGRuleParametric.h"
+#include "ofxLSGUtils.h"
+#include "ofxLSGSanitizer.h"
 
-#ifndef ofxLSGModuleReaderParametric_hpp
-#define ofxLSGModuleReaderParametric_hpp
+typedef pair<string,vector<float>> Module; // like A[1.0,2.0]
+typedef pair<string, map<string, float>> ModuleMapped; // like A{x:1.0, y: 2.0}
+class ofxLSGModuleReaderParametric{
+public:
+    static vector<ModuleMapped> initializeMap(vector<Module> modules, vector<ofxLSGRuleParametric> ruleContainer);
 
-#include <stdio.h>
-
-#endif /* ofxLSGModuleReaderParametric_hpp */
+    static const map<string,vector<string>> getVarNamesOutOfRules(vector<ofxLSGRuleParametric> rulesContainer);
+    static bool predecessorMatchModules(pair<string,vector<string>>, Module module);
+    static const bool moduleNotMentionedInPredecessors(map<string,vector<string>> predecessors, Module module);
+};

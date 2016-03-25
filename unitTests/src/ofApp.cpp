@@ -11,7 +11,7 @@ void ofApp::setup(){
 
     // parametric test rule with constants
     vector<string> expectedParametricWithConstantsResult{
-        //"A(12)",
+        "A(12)",
         "F(12)[+A(6)][-A(6)]",
         "F(12)[+F(6)[+A(3)][-A(3)]][-F(6)[+A(3)][-A(3)]]"
     };
@@ -19,10 +19,9 @@ void ofApp::setup(){
     constants.insert(make_pair("R", 2.0));
     auto parametricWithConstants = RuleTest(
                                    "Parametric Grammar test with Constants",
-                                   //"A(12)",
-                                   "F(12)[+A(6)][-A(6)]",
+                                   "A(12)",
                                    "A(s)->F(s)[+A(s/R)][-A(s/R)]",
-                                   1,
+                                   2,
                                    expectedParametricWithConstantsResult,
                                    constants
                                    );

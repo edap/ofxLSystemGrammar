@@ -28,6 +28,18 @@ vector<string> ofxLSGRuleParametric::getPredecessorParameters() const{
     return ofxLSGUtils::matchesInRegex(predecessor, "[a-z]");
 }
 
+// it returns a vector containing pairs, example, having a successor
+// with first element 'F(s)', it returns a pair, where 'F(s)'
+// is the key, and s is in the vector value
+vector<pair<string, vector<string>>> ofxLSGRuleParametric::getSuccessorWithParameters() const{
+    vector<pair<string, vector<string>>> result;
+    for(auto succ : successor){
+        auto params = ofxLSGUtils::matchesInRegex(succ.first, "[a-z]");
+        result.push_back(make_pair(succ.first, params));
+    }
+    return result;
+}
+
 vector<string> ofxLSGRuleParametric::getPredecessorLetters() const{
     // it puts in a vector A,B from, for example "A(x)> B(Y)"
     return ofxLSGUtils::matchesInRegex(predecessor, "[A-Z]");

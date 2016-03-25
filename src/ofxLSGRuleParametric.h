@@ -18,6 +18,7 @@ public:
     vector<ofxLSGCondition> getConditions() const;
     vector<Successor> getSuccessor() const;
     vector<string> getPredecessorParameters() const;
+    vector<pair<string, vector<string>>> getSuccessorWithParameters() const;
 private:
     string predecessor;
     vector<string> predecessorParameters;

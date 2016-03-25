@@ -17,23 +17,22 @@ vector<string> ofxLSGrammarParametric::generateSentence(vector<string> ruleListS
 string ofxLSGrammarParametric::rewriteSentence(string axiom, vector<ofxLSGRuleParametric> rulesContainer){
     auto modules = getModules(axiom);
     auto currentIterationMap = ofxLSGModuleReaderParametric::initializeMap(modules, rulesContainer);
-    string fin = "";
-    for(auto module:currentIterationMap ){
-        if(moduleNotMentionedInPredecessors(rulesContainer, module)){
-            fin += module.first;
-        }else{
+    string rewrittenSentence = axiom;
+    for(auto module : currentIterationMap){
+        if(!moduleNotMentionedInPredecessors(rulesContainer, module)){
             for(auto const rule:rulesContainer){
                 if(conditionsForReproductionAreMet(rule, module)){
-                    fin += injectResults(rule, module);
+                    rewrittenSentence = injectResults(rule, module, rewrittenSentence);
                 }
             }
         }
     }
-    return fin;
+    return rewrittenSentence;
 }
 
-string ofxLSGrammarParametric::injectResults(ofxLSGRuleParametric rule, ModuleMapped module){
-    string fin;
+//take the current module, execute the operation and replace it in the string
+string ofxLSGrammarParametric::injectResults(ofxLSGRuleParametric rule, ModuleMapped module, string axiom){
+    string replacement = "";
     for(auto successor : rule.getSuccessor()){
         map<string, string> opResults;
         for(auto op : successor.second){
@@ -42,11 +41,35 @@ string ofxLSGrammarParametric::injectResults(ofxLSGRuleParametric rule, ModuleMa
             opResults.insert(make_pair(key, ofToString(res)));
         }
         string stringAfterOperation = ofxLSGUtils::mapCopyToString(opResults, successor.first);
-        fin += stringAfterOperation;
+        replacement += stringAfterOperation;
     }
-    return fin;
+    string moduleToReplace;
+    moduleToReplace = getCurrentModuleKey(module);
+    ofStringReplace(axiom, moduleToReplace, replacement);
+    return axiom;
 }
 
+// This method is horrible, takes a module Mapped , like A: {s: 6} and returns
+// a string like 'A(6)'
+string ofxLSGrammarParametric::getCurrentModuleKey(ModuleMapped module){
+    string res;
+    res += module.first;
+    if (module.second.size()>0) {
+        res+="(";
+    }
+    int i = 0;
+    for(auto number : module.second){
+        res+=ofToString(number.second);
+        i++;
+        if(i< module.second.size()){
+            res+=",";
+        }
+    }
+    if (module.second.size()>0) {
+        res+=")";
+    }
+    return res;
+}
 
 const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(vector<ofxLSGRuleParametric> ruleContainer, ModuleMapped module){
     for(auto rule:ruleContainer){

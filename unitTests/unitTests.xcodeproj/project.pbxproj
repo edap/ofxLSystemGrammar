@@ -11,7 +11,6 @@
 		44737FA71BD44A8D8326AA02 /* ofxLSGOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE267820A1D9A9FA83CFE85F /* ofxLSGOperation.cpp */; };
 		62DF64DEF4627C992F002A29 /* ofxLSGRuleParametric.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5150E9AE3B789BDE4CE84007 /* ofxLSGRuleParametric.cpp */; };
 		6F6680391C9C80DE00B7C1E1 /* RuleTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F6680381C9C80DE00B7C1E1 /* RuleTest.cpp */; };
-		6F7282E11CA5452400983743 /* ofxLSGModuleReaderParametric.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F7282DF1CA5452400983743 /* ofxLSGModuleReaderParametric.cpp */; };
 		75FAC88317CB82EB99B08A61 /* ofxLSGrammarStochastic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACB31BA5F76934A21E12989C /* ofxLSGrammarStochastic.cpp */; };
 		89781C56C1EDCEE9189ECA47 /* ofxLSGrammarStandard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC90B401FF8C38E39F936A /* ofxLSGrammarStandard.cpp */; };
 		9D32FDFBB2A93ADD91CAEF7E /* ofxLSGSanitizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A3316D3A8A3D619237B6FAF /* ofxLSGSanitizer.cpp */; };
@@ -64,8 +63,6 @@
 		6A3E93DEC7FCFF01D84D4235 /* ofxLSGrammarStandard.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxLSGrammarStandard.h; path = ../../../addons/ofxLSystemGrammar/src/ofxLSGrammarStandard.h; sourceTree = SOURCE_ROOT; };
 		6F6680371C9C55A500B7C1E1 /* RuleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleTest.h; sourceTree = "<group>"; };
 		6F6680381C9C80DE00B7C1E1 /* RuleTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RuleTest.cpp; sourceTree = "<group>"; };
-		6F7282DF1CA5452400983743 /* ofxLSGModuleReaderParametric.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLSGModuleReaderParametric.cpp; sourceTree = "<group>"; };
-		6F7282E01CA5452400983743 /* ofxLSGModuleReaderParametric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLSGModuleReaderParametric.h; sourceTree = "<group>"; };
 		7A3316D3A8A3D619237B6FAF /* ofxLSGSanitizer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxLSGSanitizer.cpp; path = ../../../addons/ofxLSystemGrammar/src/ofxLSGSanitizer.cpp; sourceTree = SOURCE_ROOT; };
 		82F4A40A0D6CB23573ACAB61 /* ofxLSGCondition.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxLSGCondition.h; path = ../../../addons/ofxLSystemGrammar/src/ofxLSGCondition.h; sourceTree = SOURCE_ROOT; };
 		922CC4E009EDC6BCC2A51258 /* ofxLSGRuleStochastic.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxLSGRuleStochastic.h; path = ../../../addons/ofxLSystemGrammar/src/ofxLSGRuleStochastic.h; sourceTree = SOURCE_ROOT; };
@@ -189,8 +186,6 @@
 				389C82C48EECA740EE4FEC95 /* ofxLSGUtils.h */,
 				B3D0BCC5DC4FAF3E91E68D44 /* ofxLSystemGrammar.cpp */,
 				AD018E100970F45A5D5D780E /* ofxLSystemGrammar.h */,
-				6F7282DF1CA5452400983743 /* ofxLSGModuleReaderParametric.cpp */,
-				6F7282E01CA5452400983743 /* ofxLSGModuleReaderParametric.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -285,7 +280,6 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				6F6680391C9C80DE00B7C1E1 /* RuleTest.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				6F7282E11CA5452400983743 /* ofxLSGModuleReaderParametric.cpp in Sources */,
 				B6F53513F3AFE5559FA9AD5F /* ofxLSGCondition.cpp in Sources */,
 				44737FA71BD44A8D8326AA02 /* ofxLSGOperation.cpp in Sources */,
 				DF1A217E77EBFC4F05E8859A /* ofxLSGrammarDetector.cpp in Sources */,

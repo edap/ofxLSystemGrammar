@@ -1,7 +1,25 @@
 #include "ofxLSGSanitizer.h"
 
+//it just displays an error message if constant are lowercases
+void ofxLSGSanitizer::validateConstants(map<string,float> _constants){
+    for(auto cons : _constants){
+        if(itContainsLowercases(cons.first)){
+            string msg = "constant "+ cons.first +" is invalid";
+            msg += "only uppercase constant are allowed";
+            ofLogError(ofToString(msg));
+        }
+    }
+}
+
 bool ofxLSGSanitizer::isRuleValid(string rule){
     return hasMinimumParts(rule) && containsSeparator(rule);
+}
+
+bool ofxLSGSanitizer::itContainsLowercases(string str){
+    if(str.length() > 0 && ofxLSGUtils::isStringInRegex(str, "[a-z]")){
+        return true;
+    }
+    return false;
 }
 
 bool ofxLSGSanitizer::hasMinimumParts(string rule){

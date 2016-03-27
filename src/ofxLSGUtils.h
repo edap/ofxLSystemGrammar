@@ -14,7 +14,7 @@ public:
     }
 
     static bool isStringInRegex(string _line, string _reg){
-        regex regEx(_reg, regex_constants::icase);
+        regex regEx(_reg);
         if (regex_match(_line, regEx)) {
             return true;
         }else{

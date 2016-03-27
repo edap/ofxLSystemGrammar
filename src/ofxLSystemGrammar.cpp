@@ -3,6 +3,7 @@
 const vector<string> ofxLSystemGrammar::buildSentences(string rules, const int _n_steps, string _axiom, map<string,float> _constants){
     vector<string> stringRules = putStringInContainer(rules);
     vector<string> finalSentence;
+    ofxLSGSanitizer::validateConstants(_constants);
     if(ofxLSGrammarDetector::isStochastic(stringRules)){
         finalSentence = ofxLSGrammarStochastic::generateSentence(stringRules, _n_steps, _axiom, _constants);
     }else if(ofxLSGrammarDetector::isStandard(stringRules)) {

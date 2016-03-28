@@ -20,7 +20,7 @@ void ofApp::setup(){
     auto parametricWithConstants = RuleTest(
                                    "Parametric Grammar test with Constants",
                                    "A(12)",
-                                   "A(s)->F(s)[+A(s/R)][-A(s/R)]",
+                                   vector<string> {"A(s)->F(s)[+A(s/R)][-A(s/R)]"},
                                    2,
                                    expectedParametricWithConstantsResult,
                                    constants
@@ -29,11 +29,11 @@ void ofApp::setup(){
     tests.push_back(parametricWithConstants);
 
     //parametric test. Rules also in page 43 of "The Algorithmic Beauty of Plants"
-    string parametricRules;
-    parametricRules += "A(x,y): y<=3 -> A(x*2,x+y);";
-    parametricRules += "A(x,y): y>3 -> B(x)A(x/y,0);";
-    parametricRules += "B(x) :x<1 -> C;";
-    parametricRules += "B(x) : x>=1 -> B(x-1);";
+    vector<string> parametricRules;
+    parametricRules.push_back("A(x,y): y<=3 -> A(x*2,x+y)");
+    parametricRules.push_back("A(x,y): y>3 -> B(x)A(x/y,0)");
+    parametricRules.push_back("B(x) :x<1 -> C");
+    parametricRules.push_back("B(x) : x>=1 -> B(x-1)");
     vector<string> expectedParametricResult {
         "B(2)A(4,4)",
         "B(1)B(4)A(1,0)",

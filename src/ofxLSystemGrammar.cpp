@@ -1,7 +1,7 @@
 #include "ofxLSystemGrammar.h"
 
-const vector<string> ofxLSystemGrammar::buildSentences(string rules, const int _n_steps, string _axiom, map<string,float> _constants){
-    vector<string> stringRules = putStringInContainer(rules);
+const vector<string> ofxLSystemGrammar::buildSentences(vector<string> rules, const int _n_steps, string _axiom, map<string,float> _constants){
+    vector<string> stringRules = sanitizeRules(rules);
     vector<string> finalSentence;
     ofxLSGSanitizer::validateConstants(_constants);
     if(ofxLSGrammarDetector::isStochastic(stringRules)){
@@ -18,22 +18,13 @@ const vector<string> ofxLSystemGrammar::buildSentences(string rules, const int _
     return finalSentence;
 }
 
-vector<string> ofxLSystemGrammar::putStringInContainer(string rules){
-    vector<string> stringRules;
-    if(rules.find(";") != std::string::npos){
-        //multiple rules
-        auto rule_container = ofSplitString(rules, ";");
-        for(auto r:rule_container){
-            string cleaned = ofxLSGSanitizer::removeSpacesAndNewlines(r);
-            if (cleaned.length()>0 && ofxLSGSanitizer::isRuleValid(cleaned)){
-                stringRules.push_back(cleaned);
-            }
-        }
-    }else{
-        //single rule
-        if(rules.length()>0 && ofxLSGSanitizer::isRuleValid(rules)){
-            stringRules.push_back(rules);
+const vector<string> ofxLSystemGrammar::sanitizeRules(vector<string> rules){
+    vector<string> sanitizedRules;
+    for(auto r : rules){
+        string cleaned = ofxLSGSanitizer::removeSpacesAndNewlines(r);
+        if (cleaned.length()>0 && ofxLSGSanitizer::isRuleValid(cleaned)){
+            sanitizedRules.push_back(cleaned);
         }
     }
-    return stringRules;
+    return sanitizedRules;
 }

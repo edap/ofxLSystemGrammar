@@ -9,7 +9,7 @@ vector<string> ofxLSGrammarParametric::generateSentence(vector<string> ruleListS
         auto currentString = finalSentences.back();
         auto nextSentence = rewriteSentence(currentString, ruleList);
         finalSentences.push_back(nextSentence);
-        cout << nextSentence << endl;
+        //cout << nextSentence << endl;
     }
     return finalSentences;
 }

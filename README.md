@@ -31,16 +31,16 @@ vector<string> result{
 ```
 
 ## Interface
-In this small example you have seen the small interface of ofxLSystemGrammar. This addon has only one public method `buildSentences` that returns a `vector<string>`. This is the signature of this method:
+In this example you have seen the small interface of ofxLSystemGrammar. This addon has only one public method `buildSentences` that returns a `vector<string>`. This is the signature of this method:
 
 ```cpp
 static const vector<string> buildSentences(vector<string> _rules, const unsigned int _n_steps, string _axiom, map<string,float> _constants = Constants());
 ```
 
-`_rules` are the reproduction rules, in the example `{"A -> AB", "B -> A"};`
-`_n_steps` is an integer that defines how many times the axiom will be rewritten, in the example `5`
-`_axiom` is the initial "seed", that will be rewritten, in the example `B`
-`_constant` Constants is a user defined type `typedef map<string,float> Constants;` and it is empty by default. There is some example later that shows how to use it.
+- `_rules` are the reproduction rules, in the example `{"A -> AB", "B -> A"};`
+- `_n_steps` is an integer that defines how many times the axiom will be rewritten, in the example `5`
+- `_axiom` is the initial "seed", that will be rewritten, in the example `B`
+- `_constant` Constants is a user defined type `typedef map<string,float> Constants;` and it is empty by default. There is some example later that shows how to use it.
 
 
 

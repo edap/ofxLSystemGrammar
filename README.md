@@ -101,7 +101,7 @@ In this example, all the rules have more or less the same possibility to be appl
 
 ## Parametric Grammar
 A parametric grammar contains numeric parameters, the parameters can be evaluated and passed to the turtle. A typical parameter that a turtle could read is the length of a branch, or the degrees of the angle.
-In the followin example we pass parameters to the letter `A` and `B`, and we use parameters inside conditions, do decide if to apply the rule or not. For example, the following rules will be applied only if the value of `y` is less or equal to 3.
+In the following example we pass parameters to the letter `A` and `B`, and we use parameters inside conditions, do decide if to apply the rule or not. For example, the first rule `A(x,y) -> A(x*2,x+y);` will be applied only if the value of `y` is less or equal to 3.
 
 ```cpp
 vector<string> rules {
@@ -149,22 +149,3 @@ auto result = ofxLSystemGrammar::buildSentences(rule, 6, "A(1)", constants);
 ![Constant growth](img/constant_growth.png)
 
 The first case, with the `/`, emphasizes the fractal character of the resulting structure. The second case, with the `*` suggests the growth of a tree.
-
-
-
-
-
-
-
-
-
-
-
-
-Currently it supports:
-
-- DOL system (DOL-system.png)
-- Bracketed Edge rewriting
-- Bracketed Node rewriting
-- Parametric Grammar
-- Stochastic Grammar

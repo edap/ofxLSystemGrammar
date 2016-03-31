@@ -48,7 +48,7 @@ bool ofxLSGSanitizer::isProbabilityValid(vector<ofxLSGRuleStochastic> ruleList){
     for (auto r : ruleList){
         tot += r.probability;
     }
-    if (tot < 0.95 || tot > 1.0) {
+    if (tot < 0.95 || tot <= 1.0) {
         string msg = "The sum of the probability values has to be between 0.95 and 1.0";
         ofLogError(ofToString(msg));
         return false;

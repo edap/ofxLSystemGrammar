@@ -8,6 +8,25 @@ void ofApp::setup(){
     verdana14.setLineHeight(18.0f);
     verdana14.setLetterSpacing(1.037);
 
+    // A simple DOL System, as describe at the beginning of the book
+    vector<string> expectedSimpleDOL{
+        "B",
+        "A",
+        "AB",
+        "ABA",
+        "ABAAB",
+        "ABAABABA",
+    };
+    auto SimpleDOL = RuleTest(
+                                            "A simple DOL System",
+                                            "B",
+                                            vector<string> {"A->AB", "B->A"},
+                                            5,
+                                            expectedSimpleDOL
+                                            );
+    SimpleDOL.executeTest();
+    tests.push_back(SimpleDOL);
+
 
     // parametric test rule with constants
     vector<string> expectedParametricWithConstantsResult{

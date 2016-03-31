@@ -42,6 +42,56 @@ static const vector<string> buildSentences(vector<string> _rules, const unsigned
 - `_axiom` is the initial "seed", that will be rewritten, in the example `B`
 - `_constant` Constants is a user defined type `typedef map<string,float> Constants;` and it is empty by default. There is some example later that shows how to use it.
 
+## Turtle Graphics
+Adding a [turtle graphic](https://en.wikipedia.org/wiki/Turtle_graphics) interpretation of these sentences, allow us to draw fractals and L-System plants.
+A turtle graphic interpretation can take as input the result of this operation:
+
+```cpp
+vector<string> rules {"F -> F − F + F + FF − F − F + F"};
+auto result = ofxLSystemGrammar::buildSentences(rules, 4, "F");
+```
+
+An draw something like this:
+![turtle](img/turtle.png)
+
+For the sake of clarity, there is a picture containing a turtle interpretation for each of the following examples.
+
+## Bracketed Edge Rewriting
+
+A bracketed L-System contains square brackets `[ ]` that are used by the turtle to mark a position, go forth and come back to the marked position. Bracketd L-System allows branching needed in producing weeds, bushes and trees.
+Edge-rewriting means that productions rules substitute figures for polygon *edges*
+
+```cpp
+vector<string> rule {"F->F[+F]F[-F][F]"};
+auto result = ofxLSystemGrammar::buildSentences(rule, 4, "F");
+```
+
+![Bracketed Edge Rewriting](img/bracketed_edge_rew.png)
+
+## Bracketed Node Rewriting
+
+In node rewriting, productions operate on polygon *vertices*. That means that after each rewriting we can define vertices that will become branches.
+
+```cpp
+vector<string> rules {"X->F[+X][-X]FX", "F->FF"};
+auto result = ofxLSystemGrammar::buildSentences(rules, 6, "X");
+```
+
+![Bracketed Node Rewriting](img/bracketed_edge_rew.png)
+
+## Parametric Grammar
+
+*note* the actual implementation does not support nested operations like `(x+(y-2))`, but just single plain operation like `(x+2)`. The current supported operators are `+`, `-`, `*`, `/`.
+
+## Parametric Grammar with constants
+
+## Stochastic Grammar
+
+
+
+
+
+
 
 
 

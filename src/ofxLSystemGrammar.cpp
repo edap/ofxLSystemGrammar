@@ -1,6 +1,6 @@
 #include "ofxLSystemGrammar.h"
 
-const vector<string> ofxLSystemGrammar::buildSentences(vector<string> rules, const int _n_steps, string _axiom, map<string,float> _constants){
+const vector<string> ofxLSystemGrammar::buildSentences(vector<string> rules, const unsigned int _n_steps, string _axiom, map<string,float> _constants){
     vector<string> stringRules = sanitizeRules(rules);
     vector<string> finalSentence;
     ofxLSGSanitizer::validateConstants(_constants);

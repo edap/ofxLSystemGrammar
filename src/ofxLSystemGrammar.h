@@ -14,7 +14,7 @@ typedef map<string,float> Constants;
 
 class ofxLSystemGrammar {
   public:
-    static const vector<string> buildSentences(vector<string>, const int _n_steps, string _axiom, map<string,float> _constants = Constants());
+    static const vector<string> buildSentences(vector<string> _rules, const unsigned int _n_steps, string _axiom, map<string,float> _constants = Constants());
   private:
     static const vector<string> sanitizeRules(vector<string> _str);
 };

@@ -27,6 +27,23 @@ void ofApp::setup(){
     SimpleDOL.executeTest();
     tests.push_back(SimpleDOL);
 
+    // Bracketed edge rewriting system, second example page 25
+    vector<string> expectedBracketedEdge{
+        "F",
+        "F[+F]F[-F][F]",
+        "F[+F]F[-F][F][+F[+F]F[-F][F]]F[+F]F[-F][F][-F[+F]F[-F][F]][F[+F]F[-F][F]]",
+        "F[+F]F[-F][F][+F[+F]F[-F][F]]F[+F]F[-F][F][-F[+F]F[-F][F]][F[+F]F[-F][F]][+F[+F]F[-F][F][+F[+F]F[-F][F]]F[+F]F[-F][F][-F[+F]F[-F][F]][F[+F]F[-F][F]]]F[+F]F[-F][F][+F[+F]F[-F][F]]F[+F]F[-F][F][-F[+F]F[-F][F]][F[+F]F[-F][F]][-F[+F]F[-F][F][+F[+F]F[-F][F]]F[+F]F[-F][F][-F[+F]F[-F][F]][F[+F]F[-F][F]]][F[+F]F[-F][F][+F[+F]F[-F][F]]F[+F]F[-F][F][-F[+F]F[-F][F]][F[+F]F[-F][F]]]"
+    };
+    auto bracketedEdge = RuleTest(
+                              "A bracketed edge rewriting system",
+                              "F",
+                              vector<string> {"F->F[+F]F[-F][F]"},
+                              3,
+                              expectedBracketedEdge
+                              );
+    bracketedEdge.executeTest();
+    tests.push_back(bracketedEdge);
+
 
     // parametric test rule with constants
     vector<string> expectedParametricWithConstantsResult{
@@ -91,6 +108,7 @@ void ofApp::draw(){
             }
             text += "\ngot: \n";
             for(auto r :test.getResult()){
+                cout << r + "\n\n"<< endl;
                 text+= r + "\n";
             }
         }

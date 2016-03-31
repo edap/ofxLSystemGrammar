@@ -96,13 +96,60 @@ Can generate figure like this:
 ![Stochastic](img/stochastic.png)
 
 In this example, all the rules have more or less the same possibility to be applied
-*note* The sum of all the probability factors has to be between 0.95 and 1.0.
+
+*note*: The sum of all the probability factors has to be between 0.95 and 1.0.
 
 ## Parametric Grammar
+A parametric grammar contains numeric parameters, the parameters can be evaluated and passed to the turtle. A typical parameter that a turtle could read is the length of a branch, or the degrees of the angle.
+In the followin example we pass parameters to the letter `A` and `B`, and we use parameters inside conditions, do decide if to apply the rule or not. For example, the following rules will be applied only if the value of `y` is less or equal to 3.
+
+```cpp
+vector<string> rules {
+  A(x,y): y<=3 -> A(x*2,x+y);
+  A(x,y): y>3 -> B(x)A(x/y,0);
+  B(x) :x<1 -> C;
+  B(x) : x>=1 -> B(x-1);
+};
+auto result = ofxLSystemGrammar::buildSentences(rules, 3, "B(2),A(4,4)");
+```
+
+These production rules and this axiom will generate the following sequences:
+
+![Parametric](img/parametric.png)
 
 *note* the actual implementation does not support nested operations like `(x+(y-2))`, but just single plain operation like `(x+2)`. The current supported operators are `+`, `-`, `*`, `/`.
 
 ## Parametric Grammar with constants
+
+It is also possible to define constants, that will be used to calculate the value of the parameters. For example:
+
+```cpp
+// we initialize the constant "R" to the value 1.456
+map<string, float> constants;
+constants.insert(make_pair("R", 1.456));
+
+vector<string> rule { "A(s) -> F (s)[+A(s/R)][−A(s/R)]"}
+auto result = ofxLSystemGrammar::buildSentences(rule, 6, "A(1)", constants);
+```
+
+The turtle interpretation of this operation generates a space filling figure
+![Constant fractals](img/constant_fractals.png)
+
+If we change the operation, and instead to devide for `R` we multiply for `R`, we obtain a slightly different image
+
+```cpp
+// we initialize the constant "R" to the value 1.456
+map<string, float> constants;
+constants.insert(make_pair("R", 1.456));
+
+vector<string> rule { "A(s) -> F (s)[+A(s*R)][−A(s*R)]"}
+auto result = ofxLSystemGrammar::buildSentences(rule, 6, "A(1)", constants);
+```
+
+![Constant growth](img/constant_growth.png)
+
+The first case, with the `/`, emphasizes the fractal character of the resulting structure. The second case, with the `*` suggests the growth of a tree.
+
 
 
 

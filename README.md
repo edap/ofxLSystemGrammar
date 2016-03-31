@@ -79,13 +79,31 @@ auto result = ofxLSystemGrammar::buildSentences(rules, 6, "X");
 
 ![Bracketed Node Rewriting](img/bracketed_node_rew.png)
 
+## Stochastic Grammar
+
+A Stochastic L-System takes more than one rule, and apply each rule depending on a probability factor from `0.0` to `0.1`. If we define 2 rules, one with a probability factor of `80.00` and the other with probability `20.00`, most of the time only the first rule will be applied, and the second one will be ignored. Running 6 times the following instructions
+
+```cpp
+vector<string> rules {
+  "0.33 -> F -> F[+F]F[−F]F",
+  "0.33 -> F -> F[+F]F",
+  "0.34 -> F -> F[−F]F",
+};
+auto result = ofxLSystemGrammar::buildSentences(rules, 6, "X");
+```
+Can generate figure like this:
+
+![Stochastic](img/stochastic.png)
+
+In this example, all the rules have more or less the same possibility to be applied
+*note* The sum of all the probability factors has to be between 0.95 and 1.0.
+
 ## Parametric Grammar
 
 *note* the actual implementation does not support nested operations like `(x+(y-2))`, but just single plain operation like `(x+2)`. The current supported operators are `+`, `-`, `*`, `/`.
 
 ## Parametric Grammar with constants
 
-## Stochastic Grammar
 
 
 

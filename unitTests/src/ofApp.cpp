@@ -108,7 +108,7 @@ void ofApp::draw(){
             }
             text += "\ngot: \n";
             for(auto r :test.getResult()){
-                cout << r + "\n\n"<< endl;
+                //cout << r + "\n\n"<< endl;
                 text+= r + "\n";
             }
         }

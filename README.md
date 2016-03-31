@@ -77,7 +77,7 @@ vector<string> rules {"X->F[+X][-X]FX", "F->FF"};
 auto result = ofxLSystemGrammar::buildSentences(rules, 6, "X");
 ```
 
-![Bracketed Node Rewriting](img/bracketed_edge_rew.png)
+![Bracketed Node Rewriting](img/bracketed_node_rew.png)
 
 ## Parametric Grammar
 

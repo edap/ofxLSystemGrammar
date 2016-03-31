@@ -81,7 +81,7 @@ const bool ofxLSGrammarParametric::moduleNotMentionedInPredecessors(vector<ofxLS
 };
 
 // This method takes vector containing a string for each rule, and for each string
-// build a RuleParametric object(validating it) and put in in a container
+// builds a RuleParametric object(validating it) and put it in a container
 const vector<ofxLSGRuleParametric> ofxLSGrammarParametric::getRules(vector<string> ruleList, map<string,float> _constants){
     vector<ofxLSGRuleParametric> rulesContainer;
     for(auto rule:ruleList){

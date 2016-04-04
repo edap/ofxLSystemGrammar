@@ -38,7 +38,7 @@ public:
         "B(x) : x>=1 -> B(x-1)",
         "A(x,y): y<=3 -> A(x*2,x+y)"
     };
-    vector<string> parametricWithConstant { "A(s) -> F (s)[+A(s/R)][âˆ’A(s/R)]"};
+    vector<string> parametricWithConstant { "A(s) -> F (s)[+A(s/R)][â-A(s/R)]"};
 
     vector<string> resultEdgeRewriting, resultNodeRewriting, resultStochastic, resultParametric, resultParametricWithConstant;
 

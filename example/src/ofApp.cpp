@@ -8,7 +8,6 @@ void ofApp::setup(){
     verdana.setLineHeight(18.0f);
     verdana.setLetterSpacing(1.037);
 
-
    resultEdgeRewriting = ofxLSystemGrammar::buildSentences(edgeRewriting, 4, "F");
    resultNodeRewriting = ofxLSystemGrammar::buildSentences(nodeRewriting, 6, "X");
    resultStochastic = ofxLSystemGrammar::buildSentences(stochastic, 6, "F");
@@ -46,8 +45,6 @@ void ofApp::draw(){
         y += bounds.height+15;
     }
 }
-
-
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){

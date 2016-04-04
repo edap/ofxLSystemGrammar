@@ -2,6 +2,7 @@
 unitTests/bin/unitTestsDebug
 example/bin/exampleDebug
 build-unitTests-Desktop-Debug/
+example/bin/example_debug
 
 # Compiled Object files
 *.slo

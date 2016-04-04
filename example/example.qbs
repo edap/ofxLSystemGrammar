@@ -19,7 +19,6 @@ Project{
 
         of.addons: [
             'ofxLSystemGrammar'
-
         ]
 
         // additional flags for the project. the of module sets some

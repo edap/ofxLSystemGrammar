@@ -28,9 +28,9 @@ public:
     vector<string> edgeRewriting{"F->F[+F]F[-F][F]"};
     vector<string> nodeRewriting{"X->F[+X][-X]FX", "F->FF"};
     vector<string> stochastic {
-      "0.33 -> F -> F[+F]F[−F]F",
+      "0.33 -> F -> F[+F]F[‚-F]F",
       "0.33 -> F -> F[+F]F",
-      "0.34 -> F -> F[−F]F",
+      "0.34 -> F -> F[‚-F]F",
     };
     vector<string> parametric {
         "A(x,y): y<=3 -> A(x*2,x+y)",
@@ -38,7 +38,7 @@ public:
         "B(x) : x>=1 -> B(x-1)",
         "A(x,y): y<=3 -> A(x*2,x+y)"
     };
-    vector<string> parametricWithConstant { "A(s) -> F (s)[+A(s/R)][�-A(s/R)]"};
+    vector<string> parametricWithConstant { "A(s) -> F (s)[+A(s/R)][‚-A(s/R)]"};
 
     vector<string> resultEdgeRewriting, resultNodeRewriting, resultStochastic, resultParametric, resultParametricWithConstant;
 

@@ -103,7 +103,7 @@ public:
 
     // see documentation about the regex
     static vector<string> getModulesFromString(string successor){
-        // This regex deserves an explanation. Taking a string like:
+        // This regex deserves an explanation. Taking a string like:
         // "A(2.232,4)B(6,9)C(x,y)D(x+y)E(x/2)FG(x*y)H(9-6)L(x*6,0)M(4*(x+6))N(*)[+A(s/R)]"
         // it returns a vector containing
         //  A(2.232,4)

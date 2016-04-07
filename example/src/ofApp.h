@@ -26,22 +26,25 @@ public:
     ofTrueTypeFont	verdana;
 
     vector<string> edgeRewriting{"F->F[+F]F[-F][F]"};
+
     vector<string> nodeRewriting{"X->F[+X][-X]FX", "F->FF"};
+
     vector<string> stochastic {
       "0.33 -> F -> F[+F]F[‚-F]F",
       "0.33 -> F -> F[+F]F",
       "0.34 -> F -> F[‚-F]F",
     };
+
     vector<string> parametric {
         "A(x,y): y<=3 -> A(x*2,x+y)",
         "A(x,y): y>3 -> B(x)A(x/y,0)",
-        "B(x) : x>=1 -> B(x-1)",
-        "A(x,y): y<=3 -> A(x*2,x+y)"
+        "B(x) : x<1 -> C",
+        "B(x) : x>=1 -> B(x-1)"
     };
+
     vector<string> parametricWithConstant { "A(s) -> F (s)[+A(s/R)][‚-A(s/R)]"};
 
     vector<string> resultEdgeRewriting, resultNodeRewriting, resultStochastic, resultParametric, resultParametricWithConstant;
 
     vector<vector<string>> allTheResult;
-
 };

@@ -32,6 +32,11 @@ vector<string> result{
 };
 ```
 
+## Supported platforms
+*mac* and OF  0.9.3
+
+*linux* g++ 4.9 and OF version 0.9.3. On linux, you need g++ >= 4.9 and the `-std=gnu++14` flag. Otherwise you will have an error about `std::regex_iterator`. This flag is the default on OF 0.9.3, just in case you set it to `std=c++11` as described in this [post]( https://forum.openframeworks.cc/t/openframeworks-0-9-qtcreator/21312/7).
+
 ## Interface
 In this example you have seen the small interface of ofxLSystemGrammar. This addon has only one public method `buildSentences` that returns a `vector<string>`. This is the signature of this method:
 
@@ -107,10 +112,10 @@ In the following example we pass parameters to the letter `A` and `B`, and we us
 
 ```cpp
 vector<string> rules {
-  A(x,y): y<=3 -> A(x*2,x+y);
-  A(x,y): y>3 -> B(x)A(x/y,0);
-  B(x) :x<1 -> C;
-  B(x) : x>=1 -> B(x-1);
+  "A(x,y): y<=3 -> A(x*2,x+y)",
+  "A(x,y): y>3 -> B(x)A(x/y,0)",
+  "B(x) :x<1 -> C",
+  "B(x) : x>=1 -> B(x-1)"
 };
 auto result = ofxLSystemGrammar::buildSentences(rules, 3, "B(2),A(4,4)");
 ```

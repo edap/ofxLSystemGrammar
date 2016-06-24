@@ -18,6 +18,19 @@ const vector<string> ofxLSystemGrammar::buildSentences(vector<string> rules, con
     return finalSentence;
 }
 
+const string ofxLSystemGrammar::detectGrammarType(vector<string> rules){
+    vector<string> stringRules = sanitizeRules(rules);
+    if(ofxLSGrammarDetector::isStochastic(stringRules)){
+        return "stochastic";
+    }else if(ofxLSGrammarDetector::isStandard(stringRules)) {
+        return "standard";
+    }else if(ofxLSGrammarDetector::isParametric(stringRules)) {
+        return "parametric";
+    }else{
+        return "undetectable";
+    }
+}
+
 const vector<string> ofxLSystemGrammar::sanitizeRules(vector<string> rules){
     vector<string> sanitizedRules;
     for(auto r : rules){

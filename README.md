@@ -3,7 +3,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/6vbw3u2x65uu14lb?svg=true)](https://ci.appveyor.com/project/edap/ofxlsystemgrammar)
 [![Build status](https://travis-ci.org/edap/ofxLSystemGrammar.svg?branch=master)](https://travis-ci.org/edap/ofxLSystemGrammar)
 
-It is currently tested on mac and OF >= 0.9.3.
+It is currently tested on openFrameworks master and windows, mac and linux.
 
 This addon implements most of the grammars described in "The Algorithimic Beauty of Plants", a book written by Lyndenmayer and Prusinkiewicz, free available online at this [URL](http://algorithmicbotany.org/papers/#abop). This addon can be used to draw L-System plants or fractals. Although in the examples you can see some 2D graphic interpretation of this grammars, this addon takes care only of the strings generation.
 If you need a turtle graphic interpretation of the grammars generated with ofxLSystemGrammar, in 3D, have a look at [ofxLSystem](https://www.github.com/edap/ofxLSystem) to see which kind of meshes it is possible to draw using this addon.

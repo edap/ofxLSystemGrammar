@@ -33,3 +33,6 @@ example/bin/example_debug
 *.exe
 *.out
 *.app
+
+# qbs
+*qbs.user

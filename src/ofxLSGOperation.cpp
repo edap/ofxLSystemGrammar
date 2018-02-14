@@ -28,6 +28,7 @@ float ofxLSGOperation::compute(pair<string, map<string, float> > module){
             }
         }
     }
+    return 0.0;
 }
 
 float ofxLSGOperation::resolveOperation(map<string,float> keysVals){
@@ -52,6 +53,7 @@ float ofxLSGOperation::resolveOperation(map<string,float> keysVals){
     }else if(operator_ == "+"){
         return ofToFloat(first) + ofToFloat(second);
     }
+    return 0.0;
 }
 
 // Depending on which of the 3 supported operation is recognized, it initializes the

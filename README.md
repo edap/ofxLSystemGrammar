@@ -3,8 +3,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/6vbw3u2x65uu14lb?svg=true)](https://ci.appveyor.com/project/edap/ofxlsystemgrammar)
 [![Build status](https://travis-ci.org/edap/ofxLSystemGrammar.svg?branch=master)](https://travis-ci.org/edap/ofxLSystemGrammar)
 
-It is currently tested on openFrameworks master and windows, mac and linux.
-
 This addon implements most of the grammars described in "The Algorithimic Beauty of Plants", a book written by Lyndenmayer and Prusinkiewicz, free available online at this [URL](http://algorithmicbotany.org/papers/#abop). This addon can be used to draw L-System plants or fractals. Although in the examples you can see some 2D graphic interpretation of this grammars, this addon takes care only of the strings generation.
 If you need a turtle graphic interpretation of the grammars generated with ofxLSystemGrammar, in 3D, have a look at [ofxLSystem](https://www.github.com/edap/ofxLSystem) to see which kind of meshes it is possible to draw using this addon.
 
@@ -36,9 +34,9 @@ vector<string> result{
 ```
 
 ## Supported platforms
-*mac* and OF  0.9.3
+It is currently tested on mac, linux and windows against the current master branch of openFrameworks.
 
-*linux* g++ 4.9 and OF version 0.9.3. On linux, you need g++ >= 4.9 and the `-std=gnu++14` flag. Otherwise you will have an error about `std::regex_iterator`. This flag is the default on OF 0.9.3, just in case you set it to `std=c++11` as described in this [post]( https://forum.openframeworks.cc/t/openframeworks-0-9-qtcreator/21312/7).
+On linux, you need g++ >= 4.9 and the `-std=gnu++14` flag. Otherwise you will have an error about `std::regex_iterator`. This flag is the default on OF 0.9.3, just in case you set it to `std=c++11` as described in this [post]( https://forum.openframeworks.cc/t/openframeworks-0-9-qtcreator/21312/7). Normally, all the recents Linux distros have gcc bigger than 4.9, it should not be a problem.
 
 ## Interface
 In this example you have seen the small interface of ofxLSystemGrammar. This addon has only one public method `buildSentences` that returns a `vector<string>`. This is the signature of this method:
